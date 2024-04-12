@@ -1,0 +1,31 @@
+version: '3'
+services:
+  nginx-service:
+    build: ./nginx/
+    ports:
+      - "8080:80"
+    volumes:
+      - ./data/:/var/www/html/
+      - ./logs/nginx:/var/log/nginx/
+    depends_on:
+      - php-service
+      - mysql-service
+  
+  php-service:
+    build: ./php/
+    volumes:
+      - ./data/:/var/www/html/
+      - ./logs/php.log:/var/log/fpm-php.www.log
+    depends_on:
+      - mysql-service  
+    
+  mysql-service:
+    build: ./sql/
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: test_database
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3307:3306"  
+
