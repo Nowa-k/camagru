@@ -1,21 +1,11 @@
-<?php
-$host = 'mysql-service';   // MySQL server hostname within the same Docker network
-$user = 'db_user';    // MySQL username
-$pass = 'password';   // MySQL password
-$db = 'test_database';// MySQL database name
-
-// Create a new MySQLi object to establish a database connection
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Check if the connection was successful
-if ($conn->connect_error) {
-    // Display an error message and terminate the script if the connection fails
-    die("Connection failed: " . $conn->connect_error);
-}
-
-
-// If the connection is successful, print a success message
-echo "PHP Connected to MySQL successfully";
-// Close the database connection
-$conn->close();
-// ?>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Camagru</title>
+    <link href="css/header.css" rel="stylesheet">
+</head>
+<body>
+    <?php require('header.php');    ?>
+</body>
+</html>
