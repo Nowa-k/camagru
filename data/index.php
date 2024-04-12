@@ -13,9 +13,30 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 // If the connection is successful, print a success message
 echo "PHP Connected to MySQL successfully";
+
+
+/// Create table 
+
+// $sql = "CREATE TABLE users (
+//     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+//     username VARCHAR(30) NOT NULL,
+//     email VARCHAR(50)
+//     )";
+
+// if ($conn->query($sql)) {
+//     echo 'Table create';
+// } else {
+//     echo 'Failed to create table';
+// }
 // Close the database connection
+
+/// Show tables
+$showTables = mysqli_query($conn, "SHOW TABLES FROM $db");
+$tables = mysqli_fetch_array($showTables);
+foreach ($tables as $table) {
+    var_dump($table);
+}
 $conn->close();
-// ?>
+?>
