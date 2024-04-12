@@ -1,5 +1,4 @@
 <?php
-// Database connection parameters
 $host = 'mysql-service';   // MySQL server hostname within the same Docker network
 $user = 'db_user';    // MySQL username
 $pass = 'password';   // MySQL password
@@ -14,9 +13,9 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
 // If the connection is successful, print a success message
 echo "PHP Connected to MySQL successfully";
-
 // Close the database connection
 $conn->close();
-?>
+// ?>

@@ -20,7 +20,7 @@ services:
       - mysql-service  
     
   mysql-service:
-    build: ./sql/
+    image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: test_database
