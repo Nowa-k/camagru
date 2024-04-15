@@ -1,3 +1,4 @@
+<?php require($_SERVER["DOCUMENT_ROOT"] . '/important.php'); ?>
 <html lang="fr">
 <head>
     <meta charset="utf-8" />
@@ -6,6 +7,10 @@
     <link href="css/header.css" rel="stylesheet">
 </head>
 <body>
-    <?php require('header.php');    ?>
+<?php 
+require('header.php');
+
+require('footer.php');
+?>
 </body>
 </html>
