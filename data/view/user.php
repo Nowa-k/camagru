@@ -1,4 +1,10 @@
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/important.php'); ?>
+<?php 
+  require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
+
+  if (isset($_POST['form-connexion'])){
+    require("../controller/connexion.php");
+  }
+?>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
@@ -31,7 +37,7 @@
           <input class="validate" type="submit" value="Valider" />
         </form>
 
-        <form id="form-connexion" action="controller/connexion.php" method="post">
+        <form id="form-connexion" name="form-connexion" action="user.php" method="post">
           <div class="formLine">
             <label><img class='formAsset' src="../public/log.png";/></label>
             <input type="text" id="username" name="username" />
@@ -40,8 +46,13 @@
             <label><img class='formAsset' src="../public/lock.png";/></label>
             <input type="password" id="pwd" name="pwd" />
           </div>
-          <input class="validate" type="submit" value="Valider" />
+          <input class="validate" name="form-connexion" type="submit" value="Valider" />
         </form>
+        <?php
+          if (isset($error) && !empty($error)){
+            echo $error;
+          } 
+        ?>
       </div>
     </div>
   </body>

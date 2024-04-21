@@ -7,3 +7,6 @@ Web project like instagram
 Use Docker and Docker-Compose 
 
 Do : docker-compose up -d
+
+A faire:    CHOWN www-data assets/
+            chmod 755 assets/

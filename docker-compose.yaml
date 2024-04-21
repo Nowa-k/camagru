@@ -17,8 +17,7 @@ services:
       - ./data/:/var/www/html/
       - ./logs/php.log:/var/log/fpm-php.www.log
     depends_on:
-      - mysql-service  
-    
+      - mysql-service
   mysql-service:
     image: mysql:8.0
     environment:
@@ -27,5 +26,4 @@ services:
       MYSQL_USER: db_user
       MYSQL_PASSWORD: password
     ports:
-      - "3307:3306"  
-
+      - "3307:3306"
