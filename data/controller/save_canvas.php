@@ -2,7 +2,11 @@
 
 require($_SERVER["DOCUMENT_ROOT"] . '/important.php'); 
 // Vérifie si des données d'image ont été envoyées
+var_dump('test');
+var_dump($_POST);
 if (isset($_POST['imageData'])) {
+var_dump('inside');
+
     // Récupère les données de l'image et les décode
     $imageData = $_POST['imageData'];
     $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);

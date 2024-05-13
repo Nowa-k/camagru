@@ -10,7 +10,14 @@ services:
     depends_on:
       - php-service
       - mysql-service
-  
+
+  nginx-client:
+    build: ./nginx-client/
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./client/:/var/www/html/
+      
   php-service:
     build: ./php/
     volumes:

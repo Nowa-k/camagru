@@ -1,27 +1,28 @@
-<?php 
-  require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
-
-  if (isset($_POST['form-connexion'])){
-    require("../controller/connexion.php");
-  }
-?>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Camagru - Register</title>
-    <link href="../css/header.css" rel="stylesheet">
-    <link href="../css/register.css" rel="stylesheet">
+    <link href="./style/header.css" rel="stylesheet">
+    <link href="./style/register.css" rel="stylesheet">
 </head>
   <body>
-    <?php require($_SERVER["DOCUMENT_ROOT"] . '/header.php'); ?>
+    <div class="header">
+        <h1>Camagru</h1>
+        <div class="navigator">
+            <a href="http://localhost:9090/index.html"><img src="../public/home.png"/></a>
+            <a href="http://localhost:9090/connexion.html"><img src="../public/log.png"/></a>
+            <a href="http://localhost:9090/picture.html"><img src="/public/info.png"/></a>
+            <a href="http://localhost:9090/wall.html"><img src="/public/info.png"/></a>
+        </div>
+    </div>
     <div class="content">
       <div class="juice">
         <div class="form-title">
           <h2 onclick="changeForm(this)" id="title-register">Inscription</h2>
           <h2 onclick="changeForm(this)" id="title-connexion">Connection</h2>
         </div>
-        <form id="form-register" action="../controller/register.php" method="post">
+        <form id="form-register" action="" method="post">
           <div class="formLine">
             <label><img class='formAsset' src= "../public/log.png"/></label>
             <input type="text" id="username" name="username" />
@@ -48,13 +49,8 @@
           </div>
           <input class="validate" name="form-connexion" type="submit" value="Valider" />
         </form>
-        <?php
-          if (isset($error) && !empty($error)){
-            echo $error;
-          } 
-        ?>
       </div>
     </div>
   </body>
 </html>
-<script src="../script/form.js"></script>
+<script src="./script/form.js"></script>
