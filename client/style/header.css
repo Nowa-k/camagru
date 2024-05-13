@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(110deg, #CAF0F8 60%, #90E0EF 60%);
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 75px;
+    justify-content: space-evenly;
+    color : #023E8A;
+}
+
+.navigator {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.navigator a {
+    width: 50px;
+}
+
+.content {
+    display: flex;
+    width: 70%;
+    min-height: 80vh;
+    min-width: 1020px;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
