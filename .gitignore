@@ -2,4 +2,5 @@ Files to ignore
 *.log
 
 Folders to ignore
-/logs
+./logs
+./data/assets
