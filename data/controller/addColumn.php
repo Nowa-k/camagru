@@ -1,4 +1,8 @@
 <?php 
-    $sql = "ALTER TABLE users ADD valid BOOLEAN";
+    $sql = "ALTER TABLE assetfeed ADD uId INT";
     $conn->query($sql);
+
+    $sql = "ALTER TABLE assetFeed DROP uId";
+    $conn->query($sql);
+    
 ?>

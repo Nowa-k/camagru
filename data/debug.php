@@ -1,6 +1,13 @@
 <?php 
 require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
 require($_SERVER["DOCUMENT_ROOT"] . '/header.php');
+
+$fileName = "image_6643498128548.jpg";
+$username = "alex";
+$sql = "SELECT * FROM likes WHERE idfile = '$fileName' AND idlike = '$username'";
+$resultats = $conn->query($sql);
+$count = $resultats->num_rows;
+var_dump($count);
 ?>
     <h1>Debug</h1>
     <h2>Le contenu des tables</h2>
@@ -21,20 +28,37 @@ require($_SERVER["DOCUMENT_ROOT"] . '/header.php');
         $resultats = $conn->query($sql);
         foreach ($resultats as $res) {
             var_dump($res);
-            ?>
-            <br>
-            <?php
+            echo "<br>";
+        }
+    ?>
+
+    <h3>Comments</h3>
+    <?php 
+        $sql = "SELECT * FROM comments";
+        $resultats = $conn->query($sql);
+        foreach ($resultats as $res) {
+            var_dump($res);
+            echo "<br>";
+        }
+    ?>
+
+    <h3>Likes</h3>
+    <?php 
+        $sql = "SELECT * FROM likes";
+        $resultats = $conn->query($sql);
+        foreach ($resultats as $res) {
+            var_dump($res);
+            echo "<br>";
         }
     ?>
     <h2>Les differentes tables</h2>
     <?php
     $showTables = mysqli_query($conn, "SHOW TABLES FROM $db");
-    $tables = mysqli_fetch_array($showTables);
-    foreach ($tables as $table) {
-        var_dump($table);
-        ?>
-        <br>
-        <?php
+    while ($tables = mysqli_fetch_array($showTables)) {
+        foreach ($tables as $table) {
+            var_dump($table);
+            echo "<br>";
+        }
     }
     ?>
 

@@ -17,11 +17,39 @@ $sql = "CREATE TABLE IF NOT EXISTS assetfeed (
     id INT AUTO_INCREMENT PRIMARY KEY,
     filename VARCHAR(255) NOT NULL,
     filepath VARCHAR(255) NOT NULL,
+    idUsers VARCHAR(30) NOT NULL, 
+    likes INT DEFAULT 0,
+    comments INT DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
 if ($conn->query($sql)) {
     echo 'Table assetfeed create';
+} else {
+    echo 'Failed to create table';
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS comments (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    fileId VARCHAR(255) NOT NULL,
+    comment VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)";
+
+if ($conn->query($sql)) {
+    echo 'Table comments create';
+} else {
+    echo 'Failed to create table';
+}
+
+$sql = "CREATE TABLE IF NOT EXISTS likes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    idfile VARCHAR(255) NOT NULL,
+    idlike VARCHAR(255) NOT NULL
+)";
+
+if ($conn->query($sql)) {
+    echo 'Table likes create';
 } else {
     echo 'Failed to create table';
 }

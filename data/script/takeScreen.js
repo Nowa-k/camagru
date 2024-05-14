@@ -88,18 +88,17 @@ canvas.addEventListener('click', function(event) {
 });
 
 function saveCanvasToServer() {
-	console.log("insde")
-    let imageDataURL = canvas.toDataURL('image/jpeg');
+  let imageDataURL = canvas.toDataURL('image/jpeg');
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '../controller/save_canvas.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            console.log('L\'image a été enregistrée sur le serveur.');
-        }
-    };
-    xhr.send('imageData=' + encodeURIComponent(imageDataURL));
+  let xhr = new XMLHttpRequest();
+  xhr.open('POST', '../controller/save_canvas.php', true);
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log('L\'image a été enregistrée sur le serveur.');
+      }
+  };
+  xhr.send('imageData=' + encodeURIComponent(imageDataURL));
 }
 
 // Ajoutez un écouteur d'événements au clic du bouton de sauvegarde sur le serveur

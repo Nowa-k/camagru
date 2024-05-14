@@ -8,9 +8,9 @@
                 <button id="click-photo">Prendre une photo</button>
                 <form action="../controller/download.php" method="POST" enctype="multipart/form-data">
                     <input type="file" name="myImage" accept="image/*" />
-                    <button type="submit">Enregistrer</button>
+                    <button type="submit">Enregistrer file</button>
                 </form>
-                <button id="save-button">Enregister la photo</button>
+                <button id="save-button">Enregister canva</button>
             </div>
         </div>
         <div class="ctn-scrool">

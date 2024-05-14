@@ -1,4 +1,4 @@
 <?php
-    $sql = "DROP TABLE users";
+    $sql = "DROP TABLE likes";
     $conn->query($sql);
 ?>

@@ -2,9 +2,9 @@
 function saveImageToDatabase($conn, $fileName, $filePath) {
     // Génère un identifiant unique pour l'image
     $uniqueId = uniqid();
-
+    var_dump("inside");
     // Requête SQL pour insérer les informations sur l'image dans la table
-    $sql = "INSERT INTO images (id, filename, filepath) VALUES ('$uniqueId', '$fileName', '$filePath')";
+    $sql = "INSERT INTO images (uId, filename, filepath) VALUES ('$uniqueId', '$fileName', '$filePath')";
 
     // Exécute la requête
     if ($conn->query($sql) === TRUE) {
@@ -14,7 +14,10 @@ function saveImageToDatabase($conn, $fileName, $filePath) {
     }
 }
 
+var_dump($_POST);
+
 if (isset($_POST['imageData'])) {
+    var_dump("Post");
     // Récupère les données de l'image et les décode
     $imageData = $_POST['imageData'];
     $imageData = str_replace('data:image/jpeg;base64,', '', $imageData);
@@ -29,10 +32,10 @@ if (isset($_POST['imageData'])) {
 
     // Enregistre les données de l'image dans un fichier
     file_put_contents($filePath, $imageData);
+    chmod($filePath, 0664);
 
     // Enregistre l'image dans la base de données
     saveImageToDatabase($conn, $fileName, $filePath);
 }
-
 
 ?>
