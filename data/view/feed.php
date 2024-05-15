@@ -11,7 +11,25 @@
 <?php 
 require('../header.php');
 if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
-    $sql = "SELECT * FROM assetfeed ORDER BY assetfeed.id DESC LIMIT 5";
+    if (!isset ($_GET['page']) ) {  
+        $page = 1;  
+    } else {
+        if (ctype_digit($_GET['page']) && is_int($_GET['page'])) {
+            $page = $_GET['page'];  
+        } else {
+            $page = 1;
+        }
+    }
+    // Nombre de resultat pour la pagination
+    $results_per_page = 5; // Nombre de resultat par page
+    $sql = "SELECT * FROM assetfeed";
+    $resultats = $conn->query($sql);
+    $number_of_result = mysqli_num_rows($resultats);  
+    $number_of_page = ceil ($number_of_result / $results_per_page);
+    
+    // Sort 5 res
+    $page_first_result = ($page-1) * $results_per_page;    
+    $sql = "SELECT * FROM assetfeed ORDER BY assetfeed.id DESC LIMIT " . $page_first_result . "," . $results_per_page;
     $resultats = $conn->query($sql);
     ?>
     <div class="ctn-feed">
@@ -47,6 +65,14 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
                 </div>
             </div>
         <?php } ?>
+            <div class="pagination">
+                <?php
+                for($page = 1; $page<= $number_of_page; $page++) {  
+                    echo "<a class='page' href='feed.php?page=" . $page . "'>" . $page . "</a>";
+  
+                }
+                ?>
+            </div>
     </div>
     <?
 } else {
