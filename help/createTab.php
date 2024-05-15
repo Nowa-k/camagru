@@ -31,8 +31,9 @@ if ($conn->query($sql)) {
 
 $sql = "CREATE TABLE IF NOT EXISTS comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    fileId VARCHAR(255) NOT NULL,
+    idFile VARCHAR(255) NOT NULL,
     comment VARCHAR(255) NOT NULL,
+    username VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 

@@ -1,13 +1,6 @@
 <?php 
 require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
 require($_SERVER["DOCUMENT_ROOT"] . '/header.php');
-
-$fileName = "image_6643498128548.jpg";
-$username = "alex";
-$sql = "SELECT * FROM likes WHERE idfile = '$fileName' AND idlike = '$username'";
-$resultats = $conn->query($sql);
-$count = $resultats->num_rows;
-var_dump($count);
 ?>
     <h1>Debug</h1>
     <h2>Le contenu des tables</h2>

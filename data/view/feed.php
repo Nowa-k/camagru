@@ -14,7 +14,6 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
     $sql = "SELECT * FROM assetfeed ORDER BY assetfeed.id DESC LIMIT 5";
     $resultats = $conn->query($sql);
     ?>
-    <h1>Feed</h1>
     <div class="ctn-feed">
         <?php 
         foreach ($resultats as $res) {
@@ -33,8 +32,18 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
                     </div>
                 </div>
                 <div class="ctn-cmt" id=<?php echo $res['filename']; ?>>
-                    <input type="text" id="input-comment" name="input-comment" required minlength="1" maxlength="244" />
-                    <button id="commenter">Envoyer</button>
+                    <div class="ctn-comments">
+                        <?php    
+                        $sql = "SELECT * FROM comments WHERE idFile = '{$res["filename"]}' ORDER BY created_at";
+                        $comments = $conn->query($sql);
+                        foreach ($comments as $cmt) {
+                            echo "<p class='sender'>" . $cmt['username'] . "</p>";
+                            echo "<p class='message'>" . $cmt['comment'] . "</p>";
+                        }
+                        ?>
+                    </div>
+                    <input type="text" class="input-cmt" id=<?php echo $res['filename']; ?> name="input-comment" required minlength="1" maxlength="244" />
+                    <button class="commenter" id=<?php echo $res['filename']; ?>>Envoyer</button>
                 </div>
             </div>
         <?php } ?>

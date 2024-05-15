@@ -1,10 +1,6 @@
-h1 {
-    text-justify: center;
-}
-
 .ctn-feed {
-    margin: auto;
-    width: 60%;
+    margin: 20px auto;
+    width: 80%;
     max-width: 1000px;
     display: flex;
     flex-direction: column;
@@ -13,7 +9,7 @@ h1 {
 }
 
 .ctn-picture {
-    max-width: 1000px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -26,6 +22,12 @@ h1 {
 
 .username { 
     font-weight: bold;
+}
+
+.asset-feed {
+    position: relative;
+    width: 100%;
+    height: auto;    
 }
 
 .line-info {
@@ -59,15 +61,37 @@ h1 {
     width: 100%;
 }
 
-#input-comment {
-    height: 25px;
-    border-radius: 10px;
-    margin: 2px;
+.ctn-comments {
+    max-height: 350px;
+    overflow-y: auto;
 }
 
-#commenter {
+.sender {
+    width: 90%;
+    margin: 5px auto;
+    font-weight: bold;
+}
+
+.message {
+    width: 90%;
+    margin: 5px auto 10px auto;
+    overflow-x: auto;
+    margin-bottom: 5px;
+}
+
+.input-cmt {
+    margin: 5px auto;
+    width: 90%;
+    line-height: 23px;
+    border-radius: 10px;
+}
+
+.commenter {
+    text-transform: uppercase;
+    font-weight: bold;
     margin: 5px auto;
     border-radius: 10px;
     border: none;
     width: 100px;
+    padding: 10px
 }
