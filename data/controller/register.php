@@ -7,6 +7,7 @@
     $error .= parseForm($_POST['mail'], 'mail');
     $error .= parsePwd($_POST['pwd']);
 
+    var_dump($_POST);
     if (!empty($error)) {
         echo $error;
     } else {

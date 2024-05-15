@@ -1,3 +1,19 @@
+.ctn-setting {
+    margin: auto;
+    width: 80%;
+}
+
+.ctn-setting form {
+    margin: auto;
+    max-width: 1000px;
+    text-align: center;
+}
+
+.page-title {
+    margin-top: 20px;
+    text-align: center;
+}
+
 .form-title {
     display: flex;
     flex-direction: row;
@@ -20,7 +36,6 @@
     width: 500px;
     margin: auto;
     display: flex;
-    line-height: 10px;
     flex-direction: column;
     border-radius: 0 0 10px 10px;
 }
@@ -29,27 +44,29 @@
     display: none;
     width: 500px;
     margin: auto;
-    line-height: 10px;
     flex-direction: column;
     border-radius: 0 0 10px 10px;
 }
 
 .formLine {
+    width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: baseline;
-    height: 40px;
-}
-
-.formLine img {
-    position: relative;
-    top: 5px;
+    align-items: center;
+    margin: 5px auto;
+    
 }
 
 .formLine input {
     width: 100%;
     border-radius: 10px;
     height: 30px;
+}
+
+.formAsset {
+    width: 35px;
+    height: 35px;
+    margin: 5px;
 }
 
 .validate {
