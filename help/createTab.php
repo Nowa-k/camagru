@@ -33,7 +33,7 @@ $sql = "CREATE TABLE IF NOT EXISTS comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idFile VARCHAR(255) NOT NULL,
     comment VARCHAR(255) NOT NULL,
-    username VARCHAR(50) NOT NULL,
+    iduser INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )";
 
@@ -46,7 +46,7 @@ if ($conn->query($sql)) {
 $sql = "CREATE TABLE IF NOT EXISTS likes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     idfile VARCHAR(255) NOT NULL,
-    idlike VARCHAR(255) NOT NULL
+    iduser INT NOT NULL
 )";
 
 if ($conn->query($sql)) {

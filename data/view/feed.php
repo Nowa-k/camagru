@@ -52,7 +52,10 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
                 <div class="ctn-cmt" id=<?php echo $res['filename']; ?>>
                     <div class="ctn-comments">
                         <?php    
-                        $sql = "SELECT * FROM comments WHERE idFile = '{$res["filename"]}' ORDER BY created_at";
+                        $sql = "SELECT * FROM comments 
+                                LEFT JOIN users ON users.id = comments.iduser 
+                                WHERE comments.idFile = '{$res["filename"]}'
+                                ORDER BY comments.created_at";
                         $comments = $conn->query($sql);
                         foreach ($comments as $cmt) {
                             echo "<p class='sender'>" . $cmt['username'] . "</p>";

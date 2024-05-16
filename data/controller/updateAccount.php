@@ -13,21 +13,20 @@ if (isset($_POST['oldName']) && !empty($_POST['oldName'])) {
         $id = $row['id'];
         if ($row['pwd'] == password_verify($_POST['oldpwd'], $row['pwd'])) {
             echo "Verify step \n";
-
-            if (isset($_POST['username']) && !empty(isset($_POST['username']))) {
+            if (isset($_POST['username']) && !empty($_POST['username'])) {
                 echo "username step \n";
                 $info = $_POST['username'];
                 $sql = "UPDATE users SET username='$info' WHERE id='$id'";
                 $resultat = $conn->query($sql);
                 $_SESSION['username'] = $_POST["username"];
             }
-            if (isset($_POST['mail']) && !empty(isset($_POST['mail']))) {
+            if (isset($_POST['mail']) && !empty($_POST['mail'])) {
                 echo "verify mail \n";
                 $info = $_POST['mail'];
                 $sql = "UPDATE users SET email='$info' WHERE id='$id'";
                 $resultat = $conn->query($sql);
             }
-            if (isset($_POST['password']) && !empty(isset($_POST['password']))) {
+            if (isset($_POST['password']) && !empty($_POST['password'])) {
                 echo "passw step \n";
                 $info = $_POST['password'];
                 $sql = "UPDATE users SET password='$info' WHERE id='$id'";
