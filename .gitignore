@@ -4,5 +4,5 @@ Files to ignore
 
 Folders to ignore
 ./logs
-./data/assets/*
+assets/*
 ./data/help/*
