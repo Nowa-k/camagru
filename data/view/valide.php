@@ -1,30 +1,15 @@
-<?php require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    if (isset($_SESSION['valide']) && ($_SESSION['valide'] == 1)) {
-        header("Location: ../index.php");
-    }
-}
+<?php
+$to = 'camagruweb@gmail.com';
+$subject = 'Test d\'e-mail depuis Docker';
+$message = 'Ceci est un test d\'e-mail envoyé depuis Docker.';
+$headers = 'From: camagruweb@gmail.com';
+
+// Commande pour envoyer l'e-mail via msmtp
+$command = 'echo "' . $message . '" | msmtp -a alex ' . $to . ' 2>&1';
+
+// Exécute la commande et capture la sortie
+$output = shell_exec($command);
+
+// Affiche la sortie (y compris les éventuelles erreurs)
+echo nl2br($output);
 ?>
-<html lang="fr">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Camagru - Valide email</title>
-    <link href="css/header.css" rel="stylesheet">
-</head>
-<body>
-<?php 
-require('../header.php');
-$to = "a.ferrand69@gmail.com";
-$subject = "Hi!";
-$body = "Hi,\n\nHow are you?";
-if (mail($to, $subject, $body, 'From: no-reply@camagru.com')) {
-   echo "<p>Message successfully sent!</p>";
-} else {
-   echo "<p>Message delivery failed...</p>";
-}
-    
-require('../footer.php');
-?>
-</body>
-</html>
