@@ -1,16 +1,25 @@
 <?php
-$to = 'a.ferrand69@gmail.com';
-$subject = 'Test d\'e-mail depuis Docker';
-$message = 'Ceci est un test d\'e-mail envoyé depuis Docker.';
-$headers = 'From: doudoufoot.em@live.com';
+// ini_set('sendmail_path', '/usr/bin/msmtp -t');
 
-// Commande pour envoyer l'e-mail via msmtp
-$command = 'echo "' . $message . '" | msmtp -a camagru ' . $to . ' 2>&1';
+// phpinfo();
+// Destinataire
+$to = "a.ferrand69@gmail.com";
 
-// Exécute la commande et capture la sortie
-$output = shell_exec($command);
+// Sujet de l'e-mail
+$subject = "Test d'e-mail avec PHP et msmtp";
 
-// Affiche la sortie (y compris les éventuelles erreurs)
-echo nl2br($output);
+// Contenu de l'e-mail
+$message = "Ceci est un test d'e-mail envoyé avec PHP et msmtp.";
+
+// Headers
+$headers = "From: camagru42@outlook.fr\r\n";
+$headers .= "Reply-To: camagru42@outlook.fr\r\n";
+$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+// Envoi de l'e-mail
+if (mail($to, $subject, $message, $headers)) {
+    echo "E-mail envoyé avec succès.";
+} else {
+    echo "Erreur lors de l'envoi de l'e-mail.";
+}
 ?>
-<!-- echo -e "Subject: Test\n\nThis is a test email." | msmtp --debug --from=default -t doudoufoot.em@live.fr -->
