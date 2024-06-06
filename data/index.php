@@ -10,8 +10,12 @@
 <body>
 <?php 
 require('header.php');
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
-    require("./view/bord.php");
+if (isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    if (isset($_SESSION['valide']) && $_SESSION['valide'] == '1') {
+        require("./view/bord.php");
+    } else {
+        require("./view/valide.php");
+    }
 } else {
     echo '<h1>Bonjour, connectez vous ou inscrivez vous!</h1>';
 }

@@ -1,4 +1,15 @@
 <?php
+    if (!empty($_POST['notif'])) {
+        $uuid = $_SESSION['uuid'];
+        $notif = $_POST['notif'];
+        if ($notif == 1) {
+            $sql = "UPDATE users SET notif=1 WHERE uuid='$uuid'";
+            $resultat = $conn->query($sql);
+        } else {
+            $sql = "UPDATE users SET notif=0 WHERE uuid='$uuid'";
+            $resultat = $conn->query($sql);
+        }
+    }
     $username = $_SESSION['username'];
     $sql = "SELECT * from users WHERE username='$username'";
     $resultats = $conn->query($sql);
@@ -32,9 +43,11 @@
     </div>
     <div class="ctn-param">
         <h2 class="page-title">Accepter de recevoir les notifications par mail</h2>
-        <form id="form-register" action="#" method="post">
+        <form id="form-register" action="user.php" method="post">
             <div class="formLine">
-                <input type="checkbox" id="notif" name="notif" />
+                <input type="hidden" name="notif" value="2">
+                <input type="checkbox" id="notif" name="notif" value="1"
+                <?php echo ($row['notif'] == '1') ? 'checked="checked"' : ''; ?>/>
             </div>
             <input class="validate" type="submit" value="Valider" />
             </form>

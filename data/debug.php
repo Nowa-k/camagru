@@ -1,12 +1,15 @@
 <?php 
 require($_SERVER["DOCUMENT_ROOT"] . '/important.php');
 require($_SERVER["DOCUMENT_ROOT"] . '/header.php');
+
 $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uuid VARCHAR(50) NOT NULL UNIQUE,
     username VARCHAR(30) NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE,
     pwd VARCHAR(255) NOT NULL,
-    valide BOOLEAN NOT NULL DEFAULT 0
+    valide BOOLEAN NOT NULL DEFAULT 0,
+    notif BOOLEAN DEFAULT 1
     )";
 
 if ($conn->query($sql)) {

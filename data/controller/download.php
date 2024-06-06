@@ -2,7 +2,6 @@
 function saveImageToDatabase($conn, $fileName, $filePath) {
     // Génère un identifiant unique pour l'image
     $uniqueId = uniqid();
-    var_dump("inside");
     // Requête SQL pour insérer les informations sur l'image dans la table
     $sql = "INSERT INTO images (uId, filename, filepath) VALUES ('$uniqueId', '$fileName', '$filePath')";
 

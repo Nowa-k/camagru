@@ -7,15 +7,14 @@
     $error .= parseForm($_POST['mail'], 'mail');
     $error .= parsePwd($_POST['pwd']);
 
-    var_dump($_POST);
     if (!empty($error)) {
         echo $error;
     } else {
         $username = $_POST['username'];
         $email = $_POST['mail'];
         $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (username, email, pwd) VALUES ('$username', '$email', '$pwd')";
-
+        $uuid = uniqid();
+        $sql = "INSERT INTO users (uuid, username, email, pwd) VALUES ('$uuid', '$username', '$email', '$pwd')";
         if ($conn->query($sql)) {
             echo 'succes';
         } else {
@@ -42,5 +41,5 @@
         return "Le mot de passe ne remplis pas les conditions de securite\n";
     }
 
-    require( '../footer.php');
+    require( '../footer.php');  
 ?>

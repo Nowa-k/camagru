@@ -10,8 +10,7 @@
 <body>
 <?php 
 require('../header.php');
-if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
-    if (!isset ($_GET['page']) ) {  
+    if (!isset ($_GET['page'])) {  
         $page = 1;  
     } else {
         if (ctype_digit($_GET['page']) && is_int($_GET['page'])) {
@@ -67,7 +66,8 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
                     <button class="commenter" id=<?php echo $res['filename']; ?>>Envoyer</button>
                 </div>
             </div>
-        <?php } ?>
+        <?php 
+        } ?>
             <div class="pagination">
                 <?php
                 for($page = 1; $page<= $number_of_page; $page++) {  
@@ -78,9 +78,6 @@ if (isset($_SESSION['username']) && !empty($_SESSION['username'])){
             </div>
     </div>
     <?
-} else {
-    echo '<h1>Bonjour, connectez vous ou inscrivez vous!</h1>';
-}
 require('../footer.php');
 ?>
 </body>

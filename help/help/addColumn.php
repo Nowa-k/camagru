@@ -1,5 +1,5 @@
 <?php 
-    $sql = "ALTER TABLE assetfeed ADD uId INT";
+    $sql = "ALTER TABLE users ADD notif BOOLEAN DEFAULT 1";
     $conn->query($sql);
 
     $sql = "ALTER TABLE assetFeed DROP uId";

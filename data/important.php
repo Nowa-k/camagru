@@ -8,4 +8,6 @@
     // Create a new MySQLi object to establish a database connection
     $conn = new mysqli($host, $user, $pass, $db);
     $rootPath = "http://127.0.0.1:8080";
+
+    
 ?>
