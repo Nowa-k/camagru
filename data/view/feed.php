@@ -32,11 +32,31 @@ require('../header.php');
     $resultats = $conn->query($sql);
     ?>
     <div class="ctn-feed">
+        <div class="cta-account">
+            <button class="close-button" onclick="closeCtaAccount()">×</button>
+            <p>Pour commenter, veuillez vous inscrire ou vous connecter.</p>
+            <a href="http://127.0.0.1:8080/view/user.php" class="cta-button">Redirection vers page de connexion</a>
+        </div>
         <?php 
         foreach ($resultats as $res) {
             ?>
             <div class="ctn-picture">
-                <p class="username"><?php echo $res['idUsers']?></p>
+                <?php
+                    $name = $res['idUsers'];
+                    $sql = "SELECT username FROM users WHERE uuid='$name'";
+                    $query = $conn->query($sql);
+                    $info = $query->fetch_assoc();
+                    $name = $info['username'];
+                ?> 
+                <div class="title">
+                    <p class="username"><?php echo $name?></p>
+                    <?php
+                    if ($_SESSION['uuid'] == $res['idUsers']) { ?>
+                        <button class="del" onclick="suppMyAsset(<?php echo $res['id']; ?>)" >×</button>
+                        <?php
+                    }
+                    ?>
+                </div>
                 <img class="asset-feed" src=<?php echo $res['filepath']; ?> alt="feed"/>
                 <div class="line-info">
                     <div class="ctn-logo">
