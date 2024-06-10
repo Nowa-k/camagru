@@ -5,7 +5,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./data/:/var/www/html/
+      - ./application/:/var/www/html/
       - ./logs/nginx:/var/log/nginx/
     depends_on:
       - php-service
@@ -14,16 +14,16 @@ services:
   php-service:
     build: ./php/
     volumes:
-      - ./data/:/var/www/html/
+      - ./application/:/var/www/html/
       - ./logs/php.log:/var/log/fpm-php.www.log
     depends_on:
       - mysql-service
 
   mysql-service:
-    image: mysql:8.0
+    build: ./mysql/
     environment:
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: test_database
+      MYSQL_DATABASE: camagru
       MYSQL_USER: db_user
       MYSQL_PASSWORD: password
     ports:
