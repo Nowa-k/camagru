@@ -13,12 +13,29 @@ class FeedController {
     }
 
     public function add() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST);
-            var_dump($_GET);
-            // header('Location: index.php?controller=feed&action=index');
-        } else {
+        if ($_SESSION['id']) {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                Feed::add($_POST['overlayImage']);
+            }
+            $feed = Feed::getUserFeed($_SESSION['id']);
             require 'app/views/feed/add.php';
+        } else {
+            require 'app/views/user/login.php';
+        }
+    }
+
+    public function del() {
+        if ($_SESSION['id']) {
+            Feed::del($_SESSION['id'], $_GET['id']);
+        }
+        self::index();
+    }
+
+    public function create() {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_SESSION['id']) {
+            if ($_POST['canvasData'] && $_POST['overlay']) {
+                Feed::create($_POST['canvasData'], $_POST['overlay']);
+            }
         }
     }
 }

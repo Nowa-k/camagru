@@ -5,17 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camagru - Feed</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
-    <link rel="stylesheet" href="/app/public/style/form.css">
+    <link rel="stylesheet" href="/app/public/style/cam.css">
 </head>
 <body>
     <?php include 'app/views/navbar.php'; ?>
     <div class="content">
         <h1>Cree ton cama</h1>
-        <h1>Image Superposables</h1>
-        <form action="index.php?controller=feed&action=add" method="POST" enctype="multipart/form-data">
-            <input type="file" name="myImage" accept="image/*" />
-            <button type="submit">Enregistrer file</button>
+        <h2>Image Superposables</h2>
+        <div class="camera">
+            <video id="video" autoplay></video>
+            <canvas id="canvas"></canvas>
+            <div class="ctn-btn">
+                <button id="start-camera">Start Camera</button>
+                <button id="click-photo">Prendre une photo</button>  
+            </div> 
+        </div>   
+        <form id="imageForm" method="post" action="index.php?controller=feed&action=add" enctype="multipart/form-data">
+            <label for="userImage">Télécharger une image:</label>
+            <input type="file" id="userImage" name="userImage" accept="image/*" required>
+
+            <h3>Sélectionner une image superposable :</h3>
+            <input type="radio" id="overlay1" name="overlayImage" value="overlay/cat.png" required>
+            <label for="overlay1"><img class="overlayImage" src="overlay/cat.png" alt="Overlay 1"></label>
+
+            <input type="radio"  id="overlay2" name="overlayImage" value="overlay/ange.png" required>
+            <label for="overlay2"><img class="overlayImage" src="overlay/ange.png" alt="Overlay 2"></label>
+            
+            <input type="radio"  id="overlay3" name="overlayImage" value="overlay/demon.png" required>
+            <label for="overlay3"><img class="overlayImage" src="overlay/demon.png" alt="Overlay 3"></label>
+
+            <input type="radio"  id="overlay4" name="overlayImage" value="overlay/lunette.png" required>
+            <label for="overlay4"><img class="overlayImage" src="overlay/lunette.png" alt="Overlay 4"></label>
+
+            <button type="submit" id="submitButton" class="disabled" disabled>Créer l'image</button>
         </form>
+        <button id="create" class="disabled" disabled>Creer montage</button> 
+        <div class="feedUser">
+        <?php foreach ($feed as $picture): ?>
+        <div class="picture-item">
+            <img src="<?php echo $picture['filepath']; ?>" class="picture">
+        </div>
+        <?php endforeach; ?>
+        </div>
     </div>
 </body>
 </html>

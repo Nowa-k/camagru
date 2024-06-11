@@ -11,7 +11,7 @@ class User {
         return false;
     }
 
-    function parseEmail($email) {
+    public static function parseEmail($email) {
         $email = trim($email);
         if (empty($email)) {
             return false;
@@ -65,7 +65,7 @@ class User {
         if (!self::parsePwd($pwd)) {
             return ;
         }
-        if (parseEmail($mail)) {
+        if (!self::parseEmail($mail)) {
             return ;
         }
         $pwdHashed = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
