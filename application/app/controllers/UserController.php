@@ -62,7 +62,7 @@ class UserController {
             require 'app/views/user/index.php';
             return ;
         }
-        // self::myMailIsValide();
+        self::myMailIsValide();
         $id = $_SESSION['id'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['username'])

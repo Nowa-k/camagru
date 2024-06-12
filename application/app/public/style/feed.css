@@ -35,3 +35,25 @@
     border-radius: 5px;
 }
 
+.ctn-logo {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}
+
+.ctn-logo img {
+    width: 25px;
+}
+
+.ctn-logo p {
+    line-height: 0;
+    font-weight: bold;
+}
+
+.action {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
