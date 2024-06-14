@@ -10,8 +10,11 @@ let image_data_url;
 function checkConditions() {
     if (canvasFilled && overlaySelected) {
         createButton.disabled = false;
+        createButton.classList.remove('disabled');
     } else {
+
         createButton.disabled = true;
+        createButton.classList.add('disabled');
     }
 }
 
@@ -54,6 +57,7 @@ document.querySelectorAll('input[name="overlayImage"]').forEach((input) => {
 document.getElementById('userImage').addEventListener('change', () => {
     if (document.querySelector('input[name="overlayImage"]:checked')) {
         document.getElementById('submitButton').disabled = false;
+
         document.getElementById('submitButton').classList.remove('disabled');
     }
 });

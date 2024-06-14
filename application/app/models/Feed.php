@@ -40,9 +40,30 @@ class Feed {
 
     public static function getById($id) {
         $db = getDBConnection();
-        $stmt = $db->prepare('SELECT * FROM feed WHERE id = ?');
+        $stmt = $db->prepare('SELECT feed.*, users.username
+                    FROM feed
+                    JOIN users ON feed.userid = users.id
+                    WHERE feed.id = ?');
         $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $feed = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$feed) {
+            return ;
+        }
+        $stmtComments = $db->prepare('SELECT comments.comment, users.username 
+            FROM comments 
+            JOIN users ON comments.iduser = users.id 
+            WHERE comments.idfile = ? 
+            ORDER BY comments.created_at ASC');
+        $stmtComments->execute([$feed['id']]);
+        $feed['cmts'] = $stmtComments->fetchAll(PDO::FETCH_ASSOC);
+
+        $stmtLikes = $db->prepare('SELECT likes.*, users.username 
+            FROM likes 
+            JOIN users ON likes.iduser = users.id 
+            WHERE likes.idfile = ?');
+        $stmtLikes->execute([$feed['id']]);
+        $feed['liks'] = $stmtLikes->fetchAll(PDO::FETCH_ASSOC);
+        return $feed;
     }
 
     public static function getUserFeed($userid) {
@@ -103,7 +124,6 @@ class Feed {
         $canvasHeight = imagesy($canvasImage);
         $overlayWidth = imagesx($overlayImage);
         $overlayHeight = imagesy($overlayImage);
-
         imagecopy($canvasImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight);
 
         $filename = $targetDir . uniqid() . ".png";
@@ -114,10 +134,15 @@ class Feed {
         $db = getDBConnection();
         $stmt = $db->prepare("INSERT INTO feed (filepath, userid) VALUES (?, ?)");
         $stmt->execute([$filename, $_SESSION['id']]);
+
+        return ($overlayWidth);
     }
 
     public static function del($idsession, $idfeed) {
         $feed = self::getById($idfeed);
+        if (!$feed) {
+            return ;
+        }
         if ($feed['userid'] != $idsession) {
             return;
         }
@@ -153,7 +178,7 @@ class Feed {
         </head>
         <body>
             <p>Quelqu'un a commente une de vos publications.</p>
-            <a href='http://127.0.0.1:8080/index.php?controller=feed&action=zoom&code=1' target='_blank' style='background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;'>Voir la publication</a>
+            <a href='http://127.0.0.1:8080/index.php?controller=feed&action=zoom&code=$idfile' target='_blank' style='background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;'>Voir la publication</a>
             </body>
         </html>";
 

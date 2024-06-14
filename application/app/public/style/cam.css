@@ -3,6 +3,10 @@
     cursor: not-allowed;
 }
 
+#canvas, #video {
+    width: 100%; 
+}
+
 .overlayImage {
     width: 50px;
 }
@@ -17,4 +21,25 @@
     max-width: 95%;
     margin: 5px;
     border-radius: 6px;
+}
+
+.center {
+    text-align: center;
+}
+
+.btn-action {
+    background-color: #6A1B9A;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.disabled {
+    background-color: #B39DDB;
+
 }

@@ -26,7 +26,7 @@ h1 {
     box-sizing: border-box;
 }
 
-button[type="submit"] {
+button[type="submit"], .validate {
     width: 100%;
     background-color: #6A1B9A; /* Couleur de fond du bouton */
     color: #ffffff; /* Couleur du texte du bouton */

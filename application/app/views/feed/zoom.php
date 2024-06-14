@@ -6,13 +6,12 @@
     <title>Camagru - Feed</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
     <link rel="stylesheet" href="/app/public/style/feed.css">
-    <link rel="stylesheet" href="/app/public/style/form.css">
 </head>
 <body>
     <?php include 'app/views/navbar.php'; ?>
     <div class="content">
-        <a href="index.php?controller=feed&action=add">Prendre une photo</a>
-        <?php foreach ($feeds as $feed): ?>
+        <a href="index.php?controller=feed&action=index">Aller sur le feed</a>
+        <h1>Votre publication commente</h1>
         <div class="picture-item">
             <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $feed['userid']) : ?>
                 <a href="index.php?controller=feed&action=del&id=<?php echo $feed['id']; ?>" class="delete-link">x</a>
@@ -37,28 +36,16 @@
                 <div class="bloc-comments">         
                     <?php foreach ($feed['cmts'] as $cmt) {
                         echo '<h3>' . $cmt['username'] . '</h3>';
-                        echo '<p>' . $cmt['comment'] . '</p>';
+                        echo '<p>' .$cmt['comment'] . '</p>';
                     } ?>
                 </div>
-                <form class="form-group" method="POST" action="index.php?controller=feed&action=comment&id=<?php echo $feed['id']; ?>&page=<?php echo $page; ?>">
-                   <div class="form-line">
-                       <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
-                    </div>
-                    <button type="submit" id=<?php echo $feed['id']; ?>>Envoyer</button>
+                <form class="form-comment" method="POST" action="index.php?controller=feed&action=comment&id=<?php echo $feed['id']; ?>">
+                    <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
+                    <button class="" id=<?php echo $feed['id']; ?>>Envoyer</button>
                 </form>
             </div>
         </div>
-        <?php endforeach; ?>
-        <?php echo '<div class="pagination">';
-        for ($i = 1; $i <= $totalPages; $i++) {
-            if ($i == $page) {
-                echo '<span class="page">' . $i . '</span>';
-            } else {
-                echo '<a class="page" href="?controller=feed&action=index&page=' . $i . '">' . $i . '</a>';
-            }
-        }
-        echo '</div>';
-        ?>
     </div>
 </body>
 </html>
+<script src="/app/script/cam.js"></script>

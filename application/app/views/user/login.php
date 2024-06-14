@@ -6,9 +6,20 @@
     <title>Camagru - Inscription</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
     <link rel="stylesheet" href="/app/public/style/form.css">
+    <link rel="stylesheet" href="/app/public/style/pop.css">
 </head>
 <body>
     <?php include 'app/views/navbar.php'; ?>
+    <?php if (isset($mess) && !empty($mess)): ?>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <?php if (isset($mess) && !empty($mess)): ?>
+                <p><?php echo $mess; ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="content">
         <h1>Se connecter</h1>
         <form class="form-group" method="POST" action="index.php?controller=user&action=login">
@@ -23,6 +34,8 @@
             <button type="submit">Se connecter</button>
         </form>
         <a href="index.php?controller=user&action=forget">Mot de passe oublié</a>
+        <a href="index.php?controller=user&action=index">Annuler</a>
     </div>
 </body>
 </html>
+<script src="/app/script/pop.js"></script>

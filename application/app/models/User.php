@@ -63,25 +63,24 @@ class User {
     public static function add($username, $mail, $pwd) {
         $db = getDBConnection();
         if (!self::parsePwd($pwd)) {
-            return ;
+            return false;
         }
         if (!self::parseEmail($mail)) {
-            return ;
+            return false;
         }
         $pwdHashed = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
         $uuid = uniqid();
         try {
             $stmt = $db->prepare('INSERT INTO users (uuid, username, email, pwd) VALUES (?, ?, ?, ?)');
             $result = $stmt->execute([$uuid, $username, $mail, $pwdHashed]);
-
             if ($result) {
-                return 'User added successfully.';
+                return true;
             } else {
-                return 'Error adding user.';
+                return false;
             }
         } catch (PDOException $e) {
-            return 'Error: ' . $e->getMessage();
         }
+        return false;
     }
 
     public static function login($username, $pwd) {
@@ -91,21 +90,19 @@ class User {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if (!$row) {
-            echo 'Invalid username or password. 1';
-            return;
+            return 'Ce compte user inexistant';
         }
     
         if (password_verify($pwd, $row['pwd'])) {
-            session_start();
             $_SESSION['id'] = $row['id'];
             $_SESSION['uuid'] = $row['uuid'];
             $_SESSION['username'] = $row['username'];
             $_SESSION['email'] = $row['email'];
             $_SESSION['valide'] = $row['valide'];
             $_SESSION['notif'] = $row['notif'];
-            echo 'Login successful.';
+            return 'Connexion reussi';
         } else {
-            echo 'Invalid username or password. 2 ';
+            return 'Connexion echoue';
         }
     }
 
@@ -118,6 +115,7 @@ class User {
         $stmt->execute([$username, $id]);
 
         if ($stmt->rowCount()) {
+            $_SESSION['username'] = $username;
             return "L'username a été mis à jour avec succès.";
         } else {
             return "Le changement d'username a échoué.";
@@ -131,8 +129,9 @@ class User {
         $db = getDBConnection();
         $stmt = $db->prepare('UPDATE users SET email = ?, valide = ? WHERE id = ?');
         $stmt->execute([$mail, 0, $id]);
-        
         if ($stmt->rowCount()) {
+            $_SESSION['valide'] = 0;
+            $_SESSION['email'] = $mail;
             return "L'email a été mis à jour avec succès.";
         } else {
             return "Le changement d'email a echoue.";
@@ -170,12 +169,15 @@ class User {
         return $mess;
     }
 
-    public static function notification() {
-        
+    public static function notification($notification, $id) {
+        if ($notification == '1' || $notification == '0') {
+            $db = getDBConnection();
+            $stmt = $db->prepare('UPDATE users SET notif = ? WHERE id = ?');
+            $stmt->execute([$notification, $id]);
+        }
     }
 
     public static function valideWithCode($uuid) {
-        echo $uuid;
         $db = getDBConnection();
         $stmt = $db->prepare('UPDATE users SET valide = ? WHERE uuid = ?');
         $stmt->execute([1, $uuid]);
@@ -220,6 +222,9 @@ class User {
 
     public static function mailForPassword($to) {
         $user = self::getByMail($to);
+        if (!$user) {
+            return "Email inexistant";
+        }
         $code = $user['uuid'];
         $subject = "Demande de nouveau mot de passe";
         $message = "

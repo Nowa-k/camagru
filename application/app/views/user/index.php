@@ -6,21 +6,27 @@
     <title>Camagru - Compte</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
     <link rel="stylesheet" href="/app/public/style/form.css">
+    <link rel="stylesheet" href="/app/public/style/pop.css">
 </head>
 <body>
-    <?php include 'app/views/navbar.php'; ?>
+    <?php include 'app/views/navbar.php';
+    if (isset($mess) && !empty($mess)): ?>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn" onclick="closePopup()">&times;</span>
+            <?php if (isset($mess) && !empty($mess)): ?>
+                <p><?php echo $mess; ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php endif; ?>
     <div class="content">
         <h1>Compte</h1>
-        <?php foreach ($users as $user): ?>
-            <h2><?php echo $user['username']; ?></h2>
-            <h2><?php echo "mail : " . $user['email']; ?></h2>
-            <h2><?php echo "notif : " . $user['notif']; ?></h2>
-            <h2><?php echo "valide : " . $user['valide']; ?></h2>
-            <p><?php echo $user['pwd']; ?></p>
-        <?php endforeach; ?>
         <a href="index.php?controller=user&action=add">S'inscrire</a>
         <a href="index.php?controller=user&action=login">Se connecter</a>
     </div>
 </body>
 </html>
+<script src="/app/script/pop.js"></script>
+
 

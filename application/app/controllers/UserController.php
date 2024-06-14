@@ -2,6 +2,19 @@
 require_once 'app/models/User.php';
 
 class UserController {
+    private function verifyField($text, $lenght) {
+        if (strlen($text) == 0 || strlen($text) > $lenght) {
+            return false;
+        }
+        return true;
+    }
+
+    private function cleanField($text) {
+        $text = trim($text);
+        $text = htmlspecialchars($text);
+        return $text;
+    }
+
     public function index() {
         $users = User::getAll();
         require 'app/views/user/index.php';
@@ -18,17 +31,22 @@ class UserController {
                 && isset($_POST['pwd'])
                 && isset($_POST['mail']))
             {
-                $username = $_POST['username'];
-                $pwd = $_POST['pwd'];
-                $mail = $_POST['mail'];
-                User::add($username, $mail, $pwd);
-                header('Location: index.php?controller=user&action=index');
-            } else {
-                // Send error
+                if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 50) && $this->verifyField($_POST['mail'], 50)) {
+                    $username = $this->cleanField($_POST['username']);
+                    $pwd = $this->cleanField($_POST['pwd']);
+                    $mail = $this->cleanField($_POST['mail']);
+                    if (filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($username) && !empty($pwd)) {
+                        if (User::add($username, $mail, $pwd)) {
+                            $mess = "Le compte a bien été créé, connectez-vous et validez votre inscription.";
+                            require 'app/views/user/index.php';
+                            exit;
+                        }
+                    }
+                }
             }
-        } else {
-            require 'app/views/user/add.php';
-        }
+            $mess = "L'inscription a échoué. Un champ n'est pas valide.";
+        } 
+        require 'app/views/user/add.php';
     }
 
     public function myMailIsValide() {
@@ -40,11 +58,13 @@ class UserController {
 
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['username'])
-                && isset($_POST['pwd']))
+            if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 50))
             {
-                User::login($_POST['username'], $_POST['pwd']);
-                header('Location: index.php?controller=user&action=index');
+                $username = $this->cleanField($_POST['username']);
+                $pwd = $this->cleanField($_POST['pwd']);
+                $mess = User::login($username, $pwd);
+                require 'app/views/user/index.php';
+                exit;
             }
         } else {
             require 'app/views/user/login.php';
@@ -69,13 +89,14 @@ class UserController {
                 && isset($_POST['mail'])
                 && isset($_POST['pwd'])
                 && isset($_POST['oldpwd'])) {
-                $username = $_POST['username'];
-                $mail = $_POST['mail'];
-                $pwd = $_POST['pwd'];
-                $oldpwd = $_POST['oldpwd'];
+                $username = $this->cleanField($_POST['username']);
+                $mail = $this->cleanField($_POST['mail']);
+                $pwd = $this->cleanField($_POST['pwd']);
+                $oldpwd = $this->cleanField($_POST['oldpwd']);
                 $mess = User::setting($id, $username, $mail, $pwd, $oldpwd);
-            } else {
-                User::notification();
+            }
+            if (isset($_POST['notification'])) {
+                User::notification($_POST['notification'], $_SESSION['id']);
             }
         }
         $user = User::getById($id);
@@ -96,19 +117,25 @@ class UserController {
     public function forget() {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_GET['code']) && !empty($_GET['code'])) {
-                $user = User::getByUuid($_GET['code']);
+                $code = $this->cleanField($_GET['code']);
+                $user = User::getByUuid($code);
             }            
         }
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['mail']) && !empty($_POST['mail'])) {
-                $mess['mail'] = User::mailForPassword($_POST['mail']);
+            if (isset($_POST['mail']) && !empty($_POST['mail']) && $this->verifyField($_POST['mail'], 50)) {
+                $mail = $this->cleanField($_POST['mail']);
+                $mess['mail'] = User::mailForPassword($mail);
             }
-            if (isset($_POST['username']) && !empty($_POST['username'])
-                && isset($_POST['pwd']) && !empty($_POST['pwd'])) {
-                $mess = User::resetPassword($_POST['username'], $_POST['pwd']);
+            if (isset($_POST['username']) && !empty($_POST['username'] && $this->verifyField($_POST['username'], 50))
+                && isset($_POST['pwd']) && !empty($_POST['pwd']) && $this->verifyField($_POST['pwd'], 50)) {
+                $username = $this->cleanField($_POST['username']);
+                $pwd = $this->cleanField($_POST['pwd']);
+                $mess = User::resetPassword($username, $pwd);
             }
         }
         require 'app/views/user/forget.php';
     }
+    
+
 }
 ?>

@@ -16,13 +16,13 @@
             <video id="video" autoplay></video>
             <canvas id="canvas"></canvas>
             <div class="ctn-btn">
-                <button id="start-camera">Start Camera</button>
-                <button id="click-photo">Prendre une photo</button>  
+                <button class='btn-action' id="start-camera">Start Camera</button>
+                <button class='btn-action' id="click-photo">Prendre une photo</button>  
             </div> 
         </div>   
         <form id="imageForm" method="post" action="index.php?controller=feed&action=add" enctype="multipart/form-data">
             <label for="userImage">Télécharger une image:</label>
-            <input type="file" id="userImage" name="userImage" accept="image/*" required>
+            <input class='btn-action' type="file" id="userImage" name="userImage" accept="image/*" required>
 
             <h3>Sélectionner une image superposable :</h3>
             <input type="radio" id="overlay1" name="overlayImage" value="overlay/cat.png" required>
@@ -37,9 +37,9 @@
             <input type="radio"  id="overlay4" name="overlayImage" value="overlay/lunette.png" required>
             <label for="overlay4"><img class="overlayImage" src="overlay/lunette.png" alt="Overlay 4"></label>
 
-            <button type="submit" id="submitButton" class="disabled" disabled>Créer l'image</button>
+            <p class="center"><button type="submit" id="submitButton" class='btn-action disabled' disabled>Créer l'image</button></p>
         </form>
-        <button id="create" class="disabled" disabled>Creer montage</button> 
+        <p class="center"><button id="create" class='btn-action disabled' disabled>Creer montage</button></p>
         <div class="feedUser">
         <?php foreach ($feed as $picture): ?>
         <div class="picture-item">
