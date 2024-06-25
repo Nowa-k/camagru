@@ -2170,3 +2170,289 @@
 2024/06/25 07:26:10 [notice] 1#1: start worker process 45
 2024/06/25 07:26:10 [notice] 1#1: start worker process 46
 2024/06/25 07:26:10 [notice] 1#1: start worker process 47
+2024/06/25 07:51:44 [error] 46#46: *51 client intended to send too large body: 2327469 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:01:21 [error] 28#28: *97 client intended to send too large body: 2327465 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:36:39 [error] 29#29: *140 client intended to send too large body: 2327466 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:37:30 [error] 29#29: *141 client intended to send too large body: 2327466 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:38:52 [error] 29#29: *147 client intended to send too large body: 2327469 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:41:04 [error] 29#29: *153 client intended to send too large body: 2327471 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:42:03 [error] 29#29: *156 client intended to send too large body: 2327471 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 08:44:17 [error] 30#30: *174 client intended to send too large body: 2327469 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:33:04 [error] 30#30: *181 client intended to send too large body: 2327470 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:34:54 [error] 30#30: *182 client intended to send too large body: 2327470 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:35:19 [error] 30#30: *183 client intended to send too large body: 2327467 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:36:17 [error] 31#31: *203 client intended to send too large body: 2327467 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:39:02 [error] 31#31: *205 client intended to send too large body: 2327470 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:39:39 [error] 32#32: *245 client intended to send too large body: 2327474 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:40:27 [error] 31#31: *208 client intended to send too large body: 2327467 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:41:43 [error] 33#33: *273 client intended to send too large body: 2327470 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:42:29 [error] 33#33: *274 client intended to send too large body: 2327471 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:43:10 [error] 32#32: *271 client intended to send too large body: 2327471 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:46:22 [error] 33#33: *295 client intended to send too large body: 2327471 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:46:47 [error] 33#33: *293 client intended to send too large body: 2327469 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:52:26 [error] 33#33: *310 client intended to send too large body: 2327470 bytes, client: 172.18.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 09:54:39 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2024/06/25 09:54:39 [notice] 30#30: gracefully shutting down
+2024/06/25 09:54:39 [notice] 33#33: gracefully shutting down
+2024/06/25 09:54:39 [notice] 32#32: gracefully shutting down
+2024/06/25 09:54:39 [notice] 28#28: gracefully shutting down
+2024/06/25 09:54:39 [notice] 34#34: gracefully shutting down
+2024/06/25 09:54:39 [notice] 37#37: gracefully shutting down
+2024/06/25 09:54:39 [notice] 30#30: exiting
+2024/06/25 09:54:39 [notice] 31#31: gracefully shutting down
+2024/06/25 09:54:39 [notice] 36#36: gracefully shutting down
+2024/06/25 09:54:39 [notice] 33#33: exiting
+2024/06/25 09:54:39 [notice] 38#38: gracefully shutting down
+2024/06/25 09:54:39 [notice] 39#39: gracefully shutting down
+2024/06/25 09:54:39 [notice] 35#35: gracefully shutting down
+2024/06/25 09:54:39 [notice] 32#32: exiting
+2024/06/25 09:54:39 [notice] 41#41: gracefully shutting down
+2024/06/25 09:54:39 [notice] 40#40: gracefully shutting down
+2024/06/25 09:54:39 [notice] 29#29: gracefully shutting down
+2024/06/25 09:54:39 [notice] 42#42: gracefully shutting down
+2024/06/25 09:54:39 [notice] 28#28: exiting
+2024/06/25 09:54:39 [notice] 43#43: gracefully shutting down
+2024/06/25 09:54:39 [notice] 37#37: exiting
+2024/06/25 09:54:39 [notice] 34#34: exiting
+2024/06/25 09:54:39 [notice] 46#46: gracefully shutting down
+2024/06/25 09:54:39 [notice] 31#31: exiting
+2024/06/25 09:54:39 [notice] 36#36: exiting
+2024/06/25 09:54:39 [notice] 38#38: exiting
+2024/06/25 09:54:39 [notice] 30#30: exit
+2024/06/25 09:54:39 [notice] 33#33: exit
+2024/06/25 09:54:39 [notice] 39#39: exiting
+2024/06/25 09:54:39 [notice] 35#35: exiting
+2024/06/25 09:54:39 [notice] 41#41: exiting
+2024/06/25 09:54:39 [notice] 40#40: exiting
+2024/06/25 09:54:39 [notice] 32#32: exit
+2024/06/25 09:54:39 [notice] 29#29: exiting
+2024/06/25 09:54:39 [notice] 42#42: exiting
+2024/06/25 09:54:39 [notice] 43#43: exiting
+2024/06/25 09:54:39 [notice] 46#46: exiting
+2024/06/25 09:54:39 [notice] 28#28: exit
+2024/06/25 09:54:39 [notice] 37#37: exit
+2024/06/25 09:54:39 [notice] 38#38: exit
+2024/06/25 09:54:39 [notice] 34#34: exit
+2024/06/25 09:54:39 [notice] 39#39: exit
+2024/06/25 09:54:39 [notice] 36#36: exit
+2024/06/25 09:54:39 [notice] 42#42: exit
+2024/06/25 09:54:39 [notice] 31#31: exit
+2024/06/25 09:54:39 [notice] 46#46: exit
+2024/06/25 09:54:39 [notice] 43#43: exit
+2024/06/25 09:54:39 [notice] 40#40: exit
+2024/06/25 09:54:39 [notice] 35#35: exit
+2024/06/25 09:54:39 [notice] 29#29: exit
+2024/06/25 09:54:39 [notice] 41#41: exit
+2024/06/25 09:54:39 [notice] 45#45: gracefully shutting down
+2024/06/25 09:54:39 [notice] 45#45: exiting
+2024/06/25 09:54:39 [notice] 47#47: gracefully shutting down
+2024/06/25 09:54:39 [notice] 47#47: exiting
+2024/06/25 09:54:39 [notice] 45#45: exit
+2024/06/25 09:54:39 [notice] 47#47: exit
+2024/06/25 09:54:39 [notice] 44#44: gracefully shutting down
+2024/06/25 09:54:39 [notice] 44#44: exiting
+2024/06/25 09:54:39 [notice] 44#44: exit
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 45
+2024/06/25 09:54:39 [notice] 1#1: worker process 45 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 46 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 46
+2024/06/25 09:54:39 [notice] 1#1: worker process 29 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 44 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 44
+2024/06/25 09:54:39 [notice] 1#1: worker process 28 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 39
+2024/06/25 09:54:39 [notice] 1#1: worker process 31 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 33 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 37 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 39 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 42
+2024/06/25 09:54:39 [notice] 1#1: worker process 38 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 41 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 42 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 47 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2024/06/25 09:54:39 [notice] 1#1: worker process 30 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 40 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 43
+2024/06/25 09:54:39 [notice] 1#1: worker process 34 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 35 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 43 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 09:54:39 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2024/06/25 09:54:39 [notice] 1#1: worker process 32 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: worker process 36 exited with code 0
+2024/06/25 09:54:39 [notice] 1#1: exit
+2024/06/25 09:56:03 [notice] 1#1: using the "epoll" event method
+2024/06/25 09:56:03 [notice] 1#1: nginx/1.27.0
+2024/06/25 09:56:03 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/06/25 09:56:03 [notice] 1#1: OS: Linux 5.15.0-112-generic
+2024/06/25 09:56:03 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2024/06/25 09:56:03 [notice] 1#1: start worker processes
+2024/06/25 09:56:03 [notice] 1#1: start worker process 28
+2024/06/25 09:56:03 [notice] 1#1: start worker process 29
+2024/06/25 09:56:03 [notice] 1#1: start worker process 30
+2024/06/25 09:56:03 [notice] 1#1: start worker process 31
+2024/06/25 09:56:03 [notice] 1#1: start worker process 32
+2024/06/25 09:56:03 [notice] 1#1: start worker process 33
+2024/06/25 09:56:03 [notice] 1#1: start worker process 34
+2024/06/25 09:56:03 [notice] 1#1: start worker process 35
+2024/06/25 09:56:03 [notice] 1#1: start worker process 36
+2024/06/25 09:56:03 [notice] 1#1: start worker process 37
+2024/06/25 09:56:03 [notice] 1#1: start worker process 38
+2024/06/25 09:56:03 [notice] 1#1: start worker process 39
+2024/06/25 09:56:03 [notice] 1#1: start worker process 40
+2024/06/25 09:56:03 [notice] 1#1: start worker process 41
+2024/06/25 09:56:03 [notice] 1#1: start worker process 42
+2024/06/25 09:56:03 [notice] 1#1: start worker process 43
+2024/06/25 09:56:03 [notice] 1#1: start worker process 44
+2024/06/25 09:56:03 [notice] 1#1: start worker process 45
+2024/06/25 09:56:03 [notice] 1#1: start worker process 46
+2024/06/25 09:56:03 [notice] 1#1: start worker process 47
+2024/06/25 11:10:26 [error] 35#35: *14 client intended to send too large body: 2327467 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:16:01 [error] 36#36: *28 client intended to send too large body: 2327471 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:18:14 [error] 37#37: *30 client intended to send too large body: 2327474 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:20:54 [error] 38#38: *39 client intended to send too large body: 2327469 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:22:02 [error] 39#39: *41 client intended to send too large body: 2327465 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:22:31 [error] 40#40: *43 client intended to send too large body: 2327465 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 11:22:40 [error] 41#41: *44 client intended to send too large body: 2327474 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 12:24:12 [error] 42#42: *46 client intended to send too large body: 2327472 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 12:27:14 [error] 44#44: *52 client intended to send too large body: 2327472 bytes, client: 172.19.0.1, server: localhost, request: "POST /index.php?controller=feed&action=add HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/index.php?controller=feed&action=add"
+2024/06/25 12:28:26 [notice] 1#1: signal 3 (SIGQUIT) received, shutting down
+2024/06/25 12:28:26 [notice] 30#30: gracefully shutting down
+2024/06/25 12:28:26 [notice] 29#29: gracefully shutting down
+2024/06/25 12:28:26 [notice] 34#34: gracefully shutting down
+2024/06/25 12:28:26 [notice] 32#32: gracefully shutting down
+2024/06/25 12:28:26 [notice] 36#36: gracefully shutting down
+2024/06/25 12:28:26 [notice] 33#33: gracefully shutting down
+2024/06/25 12:28:26 [notice] 30#30: exiting
+2024/06/25 12:28:26 [notice] 31#31: gracefully shutting down
+2024/06/25 12:28:26 [notice] 29#29: exiting
+2024/06/25 12:28:26 [notice] 39#39: gracefully shutting down
+2024/06/25 12:28:26 [notice] 33#33: exiting
+2024/06/25 12:28:26 [notice] 34#34: exiting
+2024/06/25 12:28:26 [notice] 35#35: gracefully shutting down
+2024/06/25 12:28:26 [notice] 38#38: gracefully shutting down
+2024/06/25 12:28:26 [notice] 41#41: gracefully shutting down
+2024/06/25 12:28:26 [notice] 32#32: exiting
+2024/06/25 12:28:26 [notice] 37#37: gracefully shutting down
+2024/06/25 12:28:26 [notice] 42#42: gracefully shutting down
+2024/06/25 12:28:26 [notice] 40#40: gracefully shutting down
+2024/06/25 12:28:26 [notice] 36#36: exiting
+2024/06/25 12:28:26 [notice] 28#28: gracefully shutting down
+2024/06/25 12:28:26 [notice] 44#44: gracefully shutting down
+2024/06/25 12:28:26 [notice] 31#31: exiting
+2024/06/25 12:28:26 [notice] 45#45: gracefully shutting down
+2024/06/25 12:28:26 [notice] 46#46: gracefully shutting down
+2024/06/25 12:28:26 [notice] 39#39: exiting
+2024/06/25 12:28:26 [notice] 30#30: exit
+2024/06/25 12:28:26 [notice] 35#35: exiting
+2024/06/25 12:28:26 [notice] 29#29: exit
+2024/06/25 12:28:26 [notice] 34#34: exit
+2024/06/25 12:28:26 [notice] 33#33: exit
+2024/06/25 12:28:26 [notice] 38#38: exiting
+2024/06/25 12:28:26 [notice] 37#37: exiting
+2024/06/25 12:28:26 [notice] 41#41: exiting
+2024/06/25 12:28:26 [notice] 32#32: exit
+2024/06/25 12:28:26 [notice] 42#42: exiting
+2024/06/25 12:28:26 [notice] 40#40: exiting
+2024/06/25 12:28:26 [notice] 36#36: exit
+2024/06/25 12:28:26 [notice] 44#44: exiting
+2024/06/25 12:28:26 [notice] 45#45: exiting
+2024/06/25 12:28:26 [notice] 39#39: exit
+2024/06/25 12:28:26 [notice] 41#41: exit
+2024/06/25 12:28:26 [notice] 31#31: exit
+2024/06/25 12:28:26 [notice] 37#37: exit
+2024/06/25 12:28:26 [notice] 35#35: exit
+2024/06/25 12:28:26 [notice] 38#38: exit
+2024/06/25 12:28:26 [notice] 40#40: exit
+2024/06/25 12:28:26 [notice] 44#44: exit
+2024/06/25 12:28:26 [notice] 42#42: exit
+2024/06/25 12:28:26 [notice] 45#45: exit
+2024/06/25 12:28:26 [notice] 46#46: exiting
+2024/06/25 12:28:26 [notice] 28#28: exiting
+2024/06/25 12:28:26 [notice] 46#46: exit
+2024/06/25 12:28:26 [notice] 47#47: gracefully shutting down
+2024/06/25 12:28:26 [notice] 28#28: exit
+2024/06/25 12:28:26 [notice] 47#47: exiting
+2024/06/25 12:28:26 [notice] 47#47: exit
+2024/06/25 12:28:26 [notice] 43#43: gracefully shutting down
+2024/06/25 12:28:26 [notice] 43#43: exiting
+2024/06/25 12:28:26 [notice] 43#43: exit
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 46
+2024/06/25 12:28:26 [notice] 1#1: worker process 30 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 37 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 43 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 46 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 30
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 32
+2024/06/25 12:28:26 [notice] 1#1: worker process 32 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 33
+2024/06/25 12:28:26 [notice] 1#1: worker process 33 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 44
+2024/06/25 12:28:26 [notice] 1#1: worker process 34 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 28 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 44 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 34
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 40
+2024/06/25 12:28:26 [notice] 1#1: worker process 31 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 38 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 40 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 45
+2024/06/25 12:28:26 [notice] 1#1: worker process 45 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: worker process 47 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 41
+2024/06/25 12:28:26 [notice] 1#1: worker process 41 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 42
+2024/06/25 12:28:26 [notice] 1#1: worker process 42 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+2024/06/25 12:28:26 [notice] 1#1: worker process 35 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 36
+2024/06/25 12:28:26 [notice] 1#1: worker process 36 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 29
+2024/06/25 12:28:26 [notice] 1#1: worker process 29 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: signal 29 (SIGIO) received
+2024/06/25 12:28:26 [notice] 1#1: signal 17 (SIGCHLD) received from 39
+2024/06/25 12:28:26 [notice] 1#1: worker process 39 exited with code 0
+2024/06/25 12:28:26 [notice] 1#1: exit
+2024/06/25 12:29:50 [notice] 1#1: using the "epoll" event method
+2024/06/25 12:29:50 [notice] 1#1: nginx/1.27.0
+2024/06/25 12:29:50 [notice] 1#1: built by gcc 12.2.0 (Debian 12.2.0-14) 
+2024/06/25 12:29:50 [notice] 1#1: OS: Linux 5.15.0-112-generic
+2024/06/25 12:29:50 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+2024/06/25 12:29:50 [notice] 1#1: start worker processes
+2024/06/25 12:29:50 [notice] 1#1: start worker process 28
+2024/06/25 12:29:50 [notice] 1#1: start worker process 29
+2024/06/25 12:29:50 [notice] 1#1: start worker process 30
+2024/06/25 12:29:50 [notice] 1#1: start worker process 31
+2024/06/25 12:29:50 [notice] 1#1: start worker process 32
+2024/06/25 12:29:50 [notice] 1#1: start worker process 33
+2024/06/25 12:29:50 [notice] 1#1: start worker process 34
+2024/06/25 12:29:50 [notice] 1#1: start worker process 35
+2024/06/25 12:29:50 [notice] 1#1: start worker process 36
+2024/06/25 12:29:50 [notice] 1#1: start worker process 37
+2024/06/25 12:29:50 [notice] 1#1: start worker process 38
+2024/06/25 12:29:50 [notice] 1#1: start worker process 39
+2024/06/25 12:29:50 [notice] 1#1: start worker process 40
+2024/06/25 12:29:50 [notice] 1#1: start worker process 41
+2024/06/25 12:29:50 [notice] 1#1: start worker process 42
+2024/06/25 12:29:50 [notice] 1#1: start worker process 43
+2024/06/25 12:29:50 [notice] 1#1: start worker process 44
+2024/06/25 12:29:50 [notice] 1#1: start worker process 45
+2024/06/25 12:29:50 [notice] 1#1: start worker process 46
+2024/06/25 12:29:50 [notice] 1#1: start worker process 47

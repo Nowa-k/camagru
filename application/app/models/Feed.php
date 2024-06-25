@@ -75,15 +75,24 @@ class Feed {
     
 
     public static function add($overlayImage) {
+        if ($_FILES['userImage']['size'] > 10485760) {
+            return "Le fichier est trop volumineux.";
+        }
         $targetDir = "uploads/";
 
+        $file_extension = pathinfo(basename($_FILES["userImage"]["name"]), PATHINFO_EXTENSION);
+        $extensions = Array('jpg','png');
+
+        if (!in_array($file_extension, $extensions)){
+            return "Le fichier envoyé n'est pas au bon format.<br> Format demandé: png, jpg, jpeg";
+        }
         if (!is_dir($targetDir)) {
             mkdir($targetDir, 0755, true);
         }
 
         $userImage = $targetDir . basename($_FILES["userImage"]["name"]);
         if (!move_uploaded_file($_FILES["userImage"]["tmp_name"], $userImage)) {
-            die("Erreur lors du téléchargement de l'image utilisateur.");
+            return "Erreur lors du téléchargement de l'image utilisateur.";
         }
 
         $overlay = imagecreatefrompng($overlayImage);
@@ -118,6 +127,7 @@ class Feed {
         $db = getDBConnection();
         $stmt = $db->prepare("INSERT INTO feed (filepath, userid) VALUES (?, ?)");
         $stmt->execute([$filename, $_SESSION['id']]);
+        return "Succès: L'image à bien été crée.";
     }
 
     public static function create($canvasData, $overlayPath) {

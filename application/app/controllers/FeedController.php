@@ -36,7 +36,7 @@ class FeedController {
         if (isset($_SESSION['id'])) {
             if ($_SESSION['valide'] == '1') {
                 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                    Feed::add($_POST['overlayImage']);
+                    $mess = Feed::add($_POST['overlayImage']);
                 }
                 $feed = Feed::getUserFeed($_SESSION['id']);
                 require 'app/views/feed/add.php';

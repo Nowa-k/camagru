@@ -6,6 +6,7 @@
     <title>Camagru - Feed</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
     <link rel="stylesheet" href="/app/public/style/cam.css">
+    <link rel="stylesheet" href="/app/public/style/pop.css">
 </head>
 <body>
     <?php include 'app/views/navbar.php'; ?>
@@ -19,10 +20,20 @@
                 <button class='btn-action' id="start-camera">Start Camera</button>
                 <button class='btn-action' id="click-photo">Prendre une photo</button>  
             </div> 
-        </div>   
+        </div>
+        <?php if (isset($mess) && !empty($mess)): ?>
+            <div id="popup" class="popup">
+                <div class="popup-content">
+                    <span class="close-btn" onclick="closePopup()">&times;</span>
+                    <?php if (isset($mess) && !empty($mess)): ?>
+                        <p><?php echo $mess; ?></p>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?> 
         <form id="imageForm" method="post" action="index.php?controller=feed&action=add" enctype="multipart/form-data">
             <label for="userImage">Télécharger une image:</label>
-            <input class='btn-action' type="file" id="userImage" name="userImage" accept="image/*" required>
+            <input class='btn-action' type="file" id="userImage" name="userImage" accept="image/png, image/jpg, image/jpeg" required>
 
             <h3>Sélectionner une image superposable :</h3>
             <input type="radio" id="overlay1" name="overlayImage" value="overlay/cat.png" required>
@@ -60,3 +71,4 @@
 </body>
 </html>
 <script src="/app/script/cam.js"></script>
+<script src="/app/script/pop.js"></script>
