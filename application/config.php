@@ -24,7 +24,7 @@ function loadEnv($filePath) {
 
 loadEnv(__DIR__ . '/.env');
 
-define('DB_HOST', getenv('MYSQL_ROOT_PASSWORD'));
+define('DB_HOST', getenv('MYSQL_HOST'));
 define('DB_NAME', getenv('MYSQL_DATABASE'));
 define('DB_USER', getenv('MYSQL_USER'));
 define('DB_PASS', getenv('MYSQL_PASSWORD'));

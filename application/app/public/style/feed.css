@@ -59,10 +59,14 @@
 .bloc-comments {
     margin: 0 5px;
     max-height: 500px;
-    overflow-y: auto;
 }
 
 .bloc-comments h3{
     font-weight: bold;
     color: #6A1B9A;
+}
+
+.scroll {
+    overflow-y: auto;
+    padding-bottom: 10px;
 }

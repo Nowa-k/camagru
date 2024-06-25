@@ -37,6 +37,15 @@
             <input type="radio"  id="overlay4" name="overlayImage" value="overlay/lunette.png" required>
             <label for="overlay4"><img class="overlayImage" src="overlay/lunette.png" alt="Overlay 4"></label>
 
+            <input type="radio"  id="overlay5" name="overlayImage" value="overlay/bob.png" required>
+            <label for="overlay5"><img class="overlayImage" src="overlay/bob.png" alt="Overlay 5"></label>
+
+            <input type="radio"  id="overlay6" name="overlayImage" value="overlay/ovnis.png" required>
+            <label for="overlay6"><img class="overlayImage" src="overlay/ovnis.png" alt="Overlay 6"></label>
+
+            <input type="radio"  id="overlay7" name="overlayImage" value="overlay/france.png" required>
+            <label for="overlay7"><img class="overlayImage" src="overlay/france.png" alt="Overlay 7"></label>
+
             <p class="center"><button type="submit" id="submitButton" class='btn-action disabled' disabled>Créer l'image</button></p>
         </form>
         <p class="center"><button id="create" class='btn-action disabled' disabled>Creer montage</button></p>

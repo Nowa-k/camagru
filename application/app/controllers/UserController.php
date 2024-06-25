@@ -31,16 +31,14 @@ class UserController {
                 && isset($_POST['pwd'])
                 && isset($_POST['mail']))
             {
-                if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 50) && $this->verifyField($_POST['mail'], 50)) {
+                if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 255) && $this->verifyField($_POST['mail'], 50)) {
                     $username = $this->cleanField($_POST['username']);
                     $pwd = $this->cleanField($_POST['pwd']);
                     $mail = $this->cleanField($_POST['mail']);
                     if (filter_var($mail, FILTER_VALIDATE_EMAIL) && !empty($username) && !empty($pwd)) {
-                        if (User::add($username, $mail, $pwd)) {
-                            $mess = "Le compte a bien été créé, connectez-vous et validez votre inscription.";
-                            require 'app/views/user/index.php';
-                            exit;
-                        }
+                        $mess = User::add($username, $mail, $pwd);
+                        require 'app/views/user/index.php';
+                        exit;
                     }
                 }
             }
@@ -58,12 +56,12 @@ class UserController {
 
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 50))
+            if ($this->verifyField($_POST['username'], 50) && $this->verifyField($_POST['pwd'], 255))
             {
                 $username = $this->cleanField($_POST['username']);
                 $pwd = $this->cleanField($_POST['pwd']);
                 $mess = User::login($username, $pwd);
-                require 'app/views/user/index.php';
+                header('Location: index.php');
                 exit;
             }
         } else {
@@ -109,7 +107,7 @@ class UserController {
                 User::valideWithCode($_GET['code']);
             }
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                User::mailForValide($_SESSION['email'], $_SESSION['uuid']);
+            User::mailForValide($_SESSION['email'], $_SESSION['uuid']);
         }
         require 'app/views/user/verify.php';
     }
@@ -127,7 +125,7 @@ class UserController {
                 $mess['mail'] = User::mailForPassword($mail);
             }
             if (isset($_POST['username']) && !empty($_POST['username'] && $this->verifyField($_POST['username'], 50))
-                && isset($_POST['pwd']) && !empty($_POST['pwd']) && $this->verifyField($_POST['pwd'], 50)) {
+                && isset($_POST['pwd']) && !empty($_POST['pwd']) && $this->verifyField($_POST['pwd'], 255)) {
                 $username = $this->cleanField($_POST['username']);
                 $pwd = $this->cleanField($_POST['pwd']);
                 $mess = User::resetPassword($username, $pwd);

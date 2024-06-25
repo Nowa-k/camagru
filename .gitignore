@@ -1,8 +1,6 @@
 Files to ignore
-*.log
-./data/debug.php
+.env
 
 Folders to ignore
-./logs
-./data/assets
-./data/help/*
+./application/overlay
+./application/uploads/*

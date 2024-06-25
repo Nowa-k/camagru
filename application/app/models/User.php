@@ -63,24 +63,24 @@ class User {
     public static function add($username, $mail, $pwd) {
         $db = getDBConnection();
         if (!self::parsePwd($pwd)) {
-            return false;
+            return "Mot de passe invalide";
         }
         if (!self::parseEmail($mail)) {
-            return false;
+            return "Email invalide";
         }
-        $pwdHashed = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+        $pwdHashed = password_hash($pwd, PASSWORD_DEFAULT);
         $uuid = uniqid();
         try {
             $stmt = $db->prepare('INSERT INTO users (uuid, username, email, pwd) VALUES (?, ?, ?, ?)');
             $result = $stmt->execute([$uuid, $username, $mail, $pwdHashed]);
             if ($result) {
-                return true;
+                return "Votre inscription est un succès.";
             } else {
-                return false;
+                return "Impossible de créer";
             }
         } catch (PDOException $e) {
         }
-        return false;
+        return "Error";
     }
 
     public static function login($username, $pwd) {
@@ -100,9 +100,9 @@ class User {
             $_SESSION['email'] = $row['email'];
             $_SESSION['valide'] = $row['valide'];
             $_SESSION['notif'] = $row['notif'];
-            return 'Connexion reussi';
+            return 'Connexion réussi';
         } else {
-            return 'Connexion echoue';
+            return 'Connexion échouée';
         }
     }
 
@@ -134,7 +134,7 @@ class User {
             $_SESSION['email'] = $mail;
             return "L'email a été mis à jour avec succès.";
         } else {
-            return "Le changement d'email a echoue.";
+            return "Le changement d'email à échoue.";
         }
     }
 
@@ -143,7 +143,7 @@ class User {
             return ;
         }
         if (!self::parsePwd($pwd)) {
-            return "Le mot de passe n'est pas conforme au regle.";
+            return "Le mot de passe n'est pas conforme au règle.";
         }
         $pwd = password_hash($pwd, PASSWORD_DEFAULT);
         $db = getDBConnection();
@@ -151,9 +151,9 @@ class User {
         $stmt->execute([$pwd, $id]);
         
         if ($stmt->rowCount()) {
-            return "Le mot de passe a été mis à jour avec succès.";
+            return "Le mot de passe à été mis à jour avec succès.";
         } else {
-            return "Le changement de mot de passe a echoue.";
+            return "Le changement de mot de passe à échoue.";
         }
     }
 

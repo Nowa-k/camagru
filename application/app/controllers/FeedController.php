@@ -16,8 +16,9 @@ class FeedController {
     }
 
     public function index() {
-        $page = isset($_GET['page']) ? $_GET['page'] : 1;
-        $page = is_int($page) ? (int)$page : 1;
+        $page = isset($_GET['page']) ? $_GET['page'] : '1'; 
+        $page = ctype_digit($page) ? $page : 1;
+        $page = intval($page);
         $resultsPerPage = 5;
         $totalFeeds = Feed::getTotalFeedCount();
         $totalPages = ceil($totalFeeds / $resultsPerPage);
@@ -52,6 +53,7 @@ class FeedController {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['id'])) {
             if ($_SESSION['valide'] == '1') {
                 if (isset($_POST['canvasData']) && isset($_POST['overlay'])) {
+                    var_dump($_POST['canvasData'], $_POST['overlay']);
                     Feed::create($_POST['canvasData'], $_POST['overlay']);
                 }
             } else {

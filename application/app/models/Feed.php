@@ -92,7 +92,23 @@ class Feed {
         $width = imagesx($overlay);
         $height = imagesy($overlay);
 
-        imagecopy($userImg, $overlay, 0, 0, 0, 0, $width, $height);
+        $assets = [
+            ["overlay/ange.png", 200, 100],
+            ["overlay/bob.png", 300, 0],
+            ["overlay/cat.png", 400, 100],
+            ["overlay/demon.png", 100, 200],
+            ["overlay/france.png", 100, 300],
+            ["overlay/lunette.png", 300, 400],
+            ["overlay/ovnis.png", 250, 250],
+        ];
+
+        foreach ($assets as $asset) {
+            if ($asset[0] == $overlayImage) {
+                $canva = $asset;
+            } 
+        }
+
+        imagecopy($userImg, $overlay, $canva[1], $canva[2], 0, 0, $width, $height);
         $filename = $targetDir . uniqid() . ".png";
         imagepng($userImg, $filename);
 
@@ -120,11 +136,27 @@ class Feed {
             die('Erreur lors du chargement de l\'image overlay.');
         }
 
+        $assets = [
+            ["overlay/ange.png", 150, 200],
+            ["overlay/bob.png", 150, 0],
+            ["overlay/cat.png", 400, 100],
+            ["overlay/demon.png", 150, 200],
+            ["overlay/france.png", 150, 20],
+            ["overlay/lunette.png", 300, 400],
+            ["overlay/ovnis.png", 250, 250],
+        ];
+
+        foreach ($assets as $asset) {
+            if ($asset[0] == $overlayPath) {
+                $canva = $asset;
+            } 
+        }
+
         $canvasWidth = imagesx($canvasImage);
         $canvasHeight = imagesy($canvasImage);
         $overlayWidth = imagesx($overlayImage);
-        $overlayHeight = imagesy($overlayImage);
-        imagecopy($canvasImage, $overlayImage, 0, 0, 0, 0, $overlayWidth, $overlayHeight);
+        $overlayHeight = imagesy($overlayImage);     
+        imagecopy($canvasImage, $overlayImage, $canva[1], $canva[2], 0, 0, $overlayWidth, $overlayHeight);
 
         $filename = $targetDir . uniqid() . ".png";
         imagepng($canvasImage, $filename);
@@ -164,7 +196,7 @@ class Feed {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         $stmt = $db->prepare('SELECT email, notif FROM users WHERE id = ?');
-        $stmt->execute([$user['userid']]); // Utilisation de $user['userid'] pour obtenir l'identifiant de l'utilisateur
+        $stmt->execute([$user['userid']]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user['notif'] == '0') {

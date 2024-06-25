@@ -65,11 +65,21 @@ document.getElementById('userImage').addEventListener('change', () => {
 
 createButton.addEventListener("click", function() {
     if (image_data_url) {
-        var checkbox1 = document.getElementById("overlay1");
-        var checkbox2 = document.getElementById("overlay2");
-        var checkbox3 = document.getElementById("overlay3");
-        var checkbox4 = document.getElementById("overlay4");
-        if (checkbox1.checked || checkbox2.checked || checkbox3.checked || checkbox4.checked) {
+        var checkboxes = [
+            document.getElementById("overlay1"),
+            document.getElementById("overlay2"),
+            document.getElementById("overlay3"),
+            document.getElementById("overlay4"),
+            document.getElementById("overlay5"),
+            document.getElementById("overlay6"),
+            document.getElementById("overlay7")
+        ];
+    
+        var isAnyChecked = checkboxes.some(function(checkbox) {
+            return checkbox.checked;
+        });
+        
+        if (isAnyChecked) {
             let overlay = document.querySelector('input[name="overlayImage"]:checked').value; 
             let formData = new FormData();
             formData.append('canvasData', image_data_url);
@@ -80,8 +90,8 @@ createButton.addEventListener("click", function() {
             xhr.onload = function() {
                 window.location.href = 'index.php?controller=feed&action=index';
                 console.log(xhr.responseText);
-        };
-        xhr.send(formData);
+            };
+            xhr.send(formData);
         }
     }
 });
