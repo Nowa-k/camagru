@@ -98,17 +98,25 @@ class Feed {
         $overlay = imagecreatefrompng($overlayImage);
         $userImg = imagecreatefromstring(file_get_contents($userImage));
 
-        $width = imagesx($overlay);
-        $height = imagesy($overlay);
+        $widthOverlay = imagesx($overlay);
+        $heightOverlay = imagesy($overlay);
+
+        $w = imagesx($userImg);
+        $h = imagesy($userImg);
+
+        $posMidX = ceil($w / 2 - $widthOverlay / 2);
+        $posBtmY = ceil(($h / 4) * 3 - $heightOverlay / 3);
+        $posMidY = ceil($h / 2 - $heightOverlay / 2);
+        $posTopY = ceil($h / 4 - $heightOverlay / 2);
 
         $assets = [
-            ["overlay/ange.png", 200, 100],
-            ["overlay/bob.png", 300, 0],
-            ["overlay/cat.png", 400, 100],
-            ["overlay/demon.png", 100, 200],
-            ["overlay/france.png", 100, 300],
-            ["overlay/lunette.png", 300, 400],
-            ["overlay/ovnis.png", 250, 250],
+            ["overlay/ange.png", $posMidX, $posMidY],
+            ["overlay/bob.png", $posMidX, 0],
+            ["overlay/cat.png", 0, $posMidY],
+            ["overlay/demon.png", $posMidX, $posMidY],
+            ["overlay/france.png", $posMidX, $posBtmY],
+            ["overlay/lunette.png", $posMidX, $posTopY],
+            ["overlay/ovnis.png", $posMidX, 0],
         ];
 
         foreach ($assets as $asset) {
@@ -117,7 +125,7 @@ class Feed {
             } 
         }
 
-        imagecopy($userImg, $overlay, $canva[1], $canva[2], 0, 0, $width, $height);
+        imagecopy($userImg, $overlay, $canva[1], $canva[2], 0, 0, $widthOverlay, $heightOverlay);
         $filename = $targetDir . uniqid() . ".png";
         imagepng($userImg, $filename);
 
@@ -146,26 +154,32 @@ class Feed {
             die('Erreur lors du chargement de l\'image overlay.');
         }
 
-        $assets = [
-            ["overlay/ange.png", 150, 200],
-            ["overlay/bob.png", 150, 0],
-            ["overlay/cat.png", 400, 100],
-            ["overlay/demon.png", 150, 200],
-            ["overlay/france.png", 150, 20],
-            ["overlay/lunette.png", 300, 400],
-            ["overlay/ovnis.png", 250, 250],
-        ];
+        $canvasWidth = imagesx($canvasImage);
+        $canvasHeight = imagesy($canvasImage);
+        $overlayWidth = imagesx($overlayImage);
+        $overlayHeight = imagesy($overlayImage);     
 
+        $posMidX = ceil($canvasWidth / 2 - $overlayWidth / 2);
+        $posBtmY = ceil(($canvasHeight / 4) * 3 - $overlayHeight / 3);
+        $posMidY = ceil($canvasHeight / 2 - $overlayHeight / 2);
+        $posTopY = ceil($canvasHeight / 4 - $overlayHeight / 2);
+        
+        $assets = [
+            ["overlay/ange.png", $posMidX, $posMidY],
+            ["overlay/bob.png", $posMidX, 0],
+            ["overlay/cat.png", 0, $posMidY],
+            ["overlay/demon.png", $posMidX, $posMidY],
+            ["overlay/france.png", $posMidX, $posBtmY],
+            ["overlay/lunette.png", $posMidX, $posTopY],
+            ["overlay/ovnis.png", $posMidX, 0],
+            ];
+            
         foreach ($assets as $asset) {
             if ($asset[0] == $overlayPath) {
                 $canva = $asset;
             } 
         }
 
-        $canvasWidth = imagesx($canvasImage);
-        $canvasHeight = imagesy($canvasImage);
-        $overlayWidth = imagesx($overlayImage);
-        $overlayHeight = imagesy($overlayImage);     
         imagecopy($canvasImage, $overlayImage, $canva[1], $canva[2], 0, 0, $overlayWidth, $overlayHeight);
 
         $filename = $targetDir . uniqid() . ".png";
@@ -197,10 +211,15 @@ class Feed {
         $db = getDBConnection();
         $user = intval($user);
         $stmt = $db->prepare("INSERT INTO comments (idfile, comment, iduser) VALUES (?, ?, ?)");
-        $stmt->execute([$idfile, $comment, $user]);
+        $result = $stmt->execute([$idfile, $comment, $user]);
+        if (!$result || $stmt->rowCount() == 0) {
+            return "Erreur: Impossible d'ajouter le commentaire.";   
+        }
         $stmt = $db->prepare('UPDATE feed SET comments = comments + 1 WHERE id = ?');
-        $stmt->execute([$idfile]);
-
+        $result = $stmt->execute([$idfile]);
+        if (!$result || $stmt->rowCount() == 0) {
+            return "Erreur: Problème lors de l'action";
+        }
         $stmt = $db->prepare('SELECT userid FROM feed WHERE id = ?');
         $stmt->execute([$idfile]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);

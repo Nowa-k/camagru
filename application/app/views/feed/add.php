@@ -1,3 +1,4 @@
+<?php include 'app/views/cache.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,7 +19,7 @@
             <canvas id="canvas"></canvas>
             <div class="ctn-btn">
                 <button class='btn-action' id="start-camera">Start Camera</button>
-                <button class='btn-action' id="click-photo">Prendre une photo</button>  
+                <button class='btn-action disabled' id="click-photo">Prendre une photo</button>  
             </div> 
         </div>
         <?php if (isset($mess) && !empty($mess)): ?>
@@ -72,3 +73,8 @@
 </html>
 <script src="/app/script/cam.js"></script>
 <script src="/app/script/pop.js"></script>
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

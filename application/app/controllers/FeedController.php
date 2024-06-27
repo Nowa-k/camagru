@@ -2,6 +2,11 @@
 require_once 'app/models/Feed.php';
 
 class FeedController {
+    public function __construct() {
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Pragma: no-cache");
+    }
+    
     private function verifyField($text, $lenght) {
         if (strlen($text) == 0 || strlen($text) > $lenght) {
             return false;
@@ -25,6 +30,7 @@ class FeedController {
         $firstResults = ($page - 1) * $resultsPerPage;
         $feeds = Feed::getAll($firstResults, $resultsPerPage);
         require 'app/views/feed/index.php';
+        exit();
     }
 
     public function view($id) {
@@ -42,23 +48,23 @@ class FeedController {
                 require 'app/views/feed/add.php';
             } else {
                 header("Location: index.php?controller=user&action=verify");
-                exit; 
+                exit(); 
             }
         } else {
             require 'app/views/user/login.php';
-        }
+            }
+        exit();
     }
 
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['id'])) {
             if ($_SESSION['valide'] == '1') {
                 if (isset($_POST['canvasData']) && isset($_POST['overlay'])) {
-                    var_dump($_POST['canvasData'], $_POST['overlay']);
                     Feed::create($_POST['canvasData'], $_POST['overlay']);
                 }
             } else {
                 header("Location: index.php?controller=user&action=verify");
-                exit; 
+                exit(); 
             }
         }
     }
@@ -79,14 +85,15 @@ class FeedController {
                     $id = $this->cleanField($_GET['id']);
                     Feed::comment($id, $comment, $_SESSION['id']);
                     self::index();
-                    exit ;
+                    exit();
                 }
             } else {
                 header("Location: index.php?controller=user&action=verify");
-                exit; 
+                exit(); 
             }
         } 
         require 'app/views/user/login.php';
+        exit();
     }
 
     public function like() {
@@ -94,7 +101,7 @@ class FeedController {
             $id = $this->cleanField($_GET['id']);
             Feed::like($_SESSION['id'], $id);
         }
-        self::index();
+        self::index();  
     }
 
     public function zoom() {

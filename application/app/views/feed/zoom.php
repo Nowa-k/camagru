@@ -1,3 +1,4 @@
+<?php include 'app/views/cache.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,6 +12,7 @@
     <?php include 'app/views/navbar.php'; ?>
     <div class="content">
         <a href="index.php?controller=feed&action=index">Aller sur le feed</a>
+        <?php if (!empty($feed)) : ?> 
         <h1>Votre publication commente</h1>
         <div class="picture-item">
             <?php if (isset($_SESSION['id']) && $_SESSION['id'] == $feed['userid']) : ?>
@@ -45,6 +47,9 @@
                 </form>
             </div>
         </div>
+        <?php else: ?>
+            <h2>Cette publication n'existe pas ou n'existe plus.</h2>
+        <?php endif; ?>
     </div>
 </body>
 </html>

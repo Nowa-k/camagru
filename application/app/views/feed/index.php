@@ -1,3 +1,5 @@
+<?php include 'app/views/cache.php'; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

@@ -1,3 +1,4 @@
+<?php include 'app/views/cache.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -40,12 +41,12 @@
             </div>
             <div class="form-line">
                 <label>Mot de passe</label>
-                <input type="password" id="pwd" name="pwd">
+                <input type="password" id="newpwd" name="newpwd">
             </div>
             <p>Pour valider les changements mettre le mot de passe actuel</p>
             <div class="form-line">
                 <label>Mot de passe actuel</label>
-                <input type="password" id="oldpwd" name="oldpwd" required="required">
+                <input type="password" id="pwd" name="pwd" required="required">
             </div>
             <input class="validate" type="submit" value="Valider">
         </form> 

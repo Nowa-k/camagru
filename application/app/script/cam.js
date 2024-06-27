@@ -12,7 +12,6 @@ function checkConditions() {
         createButton.disabled = false;
         createButton.classList.remove('disabled');
     } else {
-
         createButton.disabled = true;
         createButton.classList.add('disabled');
     }
@@ -25,6 +24,7 @@ camera_button.addEventListener('click', async function() {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
     });
+    click_button.classList.remove('disabled');
     canvas.style.display = 'none';
    	video.style.display = 'block';
 
@@ -36,12 +36,50 @@ click_button.addEventListener('click', async function() {
     canvas.style.display = 'block';
     video.style.display = 'none';
 
- let tracks = video.srcObject.getTracks();
- tracks.forEach(track => track.stop());
- image_data_url = canvas.toDataURL('image/jpeg');
- canvasFilled = true;
- checkConditions();
+    let tracks = video.srcObject.getTracks();
+    tracks.forEach(track => track.stop());
+    image_data_url = canvas.toDataURL('image/jpeg');
+    canvasFilled = true;
+    checkConditions();
 });
+
+const overlayPositions = {
+    "overlay/ange.png": { x: "mid", y: "mid" },
+    "overlay/bob.png": { x: "mid", y: "top" },
+    "overlay/cat.png": { x: "left", y: "mid" },
+    "overlay/demon.png": { x: "mid", y: "mid" },
+    "overlay/france.png": { x: "mid", y: "bottom" },
+    "overlay/lunette.png": { x: "mid", y: "top" },
+    "overlay/ovnis.png": { x: "mid", y: "top" }
+};
+
+function getOverlayPosition(overlayPath, canvasWidth, canvasHeight, overlayWidth, overlayHeight) {
+    const position = overlayPositions[overlayPath];
+    let posX, posY;
+
+    switch(position.x) {
+        case "mid":
+            posX = Math.ceil(canvasWidth / 2 - overlayWidth / 2);
+            break;
+        case "left":
+            posX = 0;
+            break;
+    }
+
+    switch(position.y) {
+        case "mid":
+            posY = Math.ceil(canvasHeight / 2 - overlayHeight / 2);
+            break;
+        case "top":
+            posY = 0;
+            break;
+        case "bottom":
+            posY = Math.ceil((canvasHeight / 4) * 3 - overlayHeight / 3);
+            break;
+    }
+
+    return { x: posX, y: posY };
+}
 
 document.querySelectorAll('input[name="overlayImage"]').forEach((input) => {
     input.addEventListener('change', () => {
@@ -49,10 +87,27 @@ document.querySelectorAll('input[name="overlayImage"]').forEach((input) => {
             document.getElementById('submitButton').disabled = false;
             document.getElementById('submitButton').classList.remove('disabled');
         }
-        overlaySelected = true;
-        checkConditions();
+
+        let overlayPath = input.value;
+        let overlayImage = new Image();
+        overlayImage.src = overlayPath;
+
+        overlayImage.onload = () => {
+            let context = canvas.getContext('2d');
+            let position = getOverlayPosition(overlayPath, canvas.width, canvas.height, overlayImage.width, overlayImage.height);
+
+            let tempImage = new Image();
+            tempImage.src = image_data_url;
+            tempImage.onload = () => {
+                context.drawImage(tempImage, 0, 0, canvas.width, canvas.height);
+                context.drawImage(overlayImage, position.x, position.y, overlayImage.width, overlayImage.height);
+                overlaySelected = true;
+                checkConditions();
+            };
+        };
     });
 });
+
 
 document.getElementById('userImage').addEventListener('change', () => {
     if (document.querySelector('input[name="overlayImage"]:checked')) {

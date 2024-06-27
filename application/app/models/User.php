@@ -19,10 +19,6 @@ class User {
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return false;
         }
-        list($username, $domain) = explode('@', $email);
-        if (!checkdnsrr($domain, 'MX')) {
-            return false;
-        }
         return true;
     }
 
@@ -162,9 +158,16 @@ class User {
         if (!password_verify($oldpwd, $user['pwd'])) {
             return "Mot de passe actuel invalide.";
         }
-        $mess['username'] = self::updateUsername($id, $username);
-        $mess['mail'] = self::updateMail($id, $mail);
-        $mess['pwd'] = self::updatePwd($id, $pwd);
+        $mess = [];
+        if (!empty($username) && $username != $_SESSION['username']) {
+            $mess['username'] = self::updateUsername($id, $username);
+        }
+        if (!empty($mail) && $mail != $_SESSION['email']) {
+            $mess['mail'] = self::updateMail($id, $mail);
+        }
+        if (!empty($pwd)) {
+            $mess['pwd'] = self::updatePwd($id, $pwd);
+        }
         $user = self::getById($id);
         return $mess;
     }
@@ -177,11 +180,13 @@ class User {
         }
     }
 
-    public static function valideWithCode($uuid) {
+    public static function valideWithCode($uuid, $mail) {
         $db = getDBConnection();
-        $stmt = $db->prepare('UPDATE users SET valide = ? WHERE uuid = ?');
-        $stmt->execute([1, $uuid]);
-        $_SESSION['valide'] = 1;
+        $stmt = $db->prepare('UPDATE users SET valide = ? WHERE uuid = ? and email = ?');
+        $stmt->execute([1, $uuid, $mail]);
+        if ($stmt->rowCount() == 1) {
+            $_SESSION['valide'] = 1;
+        }
     } 
 
     public static function mailForValide($to, $code) {
