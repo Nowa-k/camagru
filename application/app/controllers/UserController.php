@@ -2,10 +2,6 @@
 require_once 'app/models/User.php';
 
 class UserController {
-    public function __construct() {
-        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        header("Pragma: no-cache");
-    }
 
     private function verifyField($text, $lenght) {
         if (strlen($text) == 0 || strlen($text) > $lenght) {
@@ -23,11 +19,13 @@ class UserController {
     public function index() {
         $users = User::getAll();
         require 'app/views/user/index.php';
+        exit();
     }
 
     public function view($id) {
         $user = User::getById($id);
         require 'app/views/user/view.php';
+        exit();
     }
 
     public function add() {
@@ -66,8 +64,13 @@ class UserController {
             {
                 $username = $this->cleanField($_POST['username']);
                 $pwd = $this->cleanField($_POST['pwd']);
-                $mess = User::login($username, $pwd);
-                header('Location: index.php');
+                $res = User::login($username, $pwd);
+                if ($res) {
+                    header('Location: index.php');
+                } else {
+                    $mess = "Erreur, username ou mot de passe incorrect.";
+                    require 'app/views/user/login.php';
+                }
                 exit();
             }
         } else {
@@ -86,7 +89,7 @@ class UserController {
     public function setting() {
         if (!isset($_SESSION['id'])) {
             require 'app/views/user/index.php';
-            return ;
+            exit() ;
         }
         $id = $_SESSION['id'];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -103,6 +106,8 @@ class UserController {
             if (isset($_POST['notification'])) {
                 User::notification($_POST['notification'], $_SESSION['id']);
             }
+            header("Location: index.php?controller=user&action=setting");
+            exit();
         }
         $user = User::getById($id);
         require 'app/views/user/setting.php';
@@ -113,9 +118,13 @@ class UserController {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             if (isset($_GET['code']) && !empty($_GET['code']) && isset($_SESSION['email'])) {
                 User::valideWithCode($_GET['code'], $_SESSION['email']);
+                header("Location: index.php?controller=user&action=verify");
+                exit();
             }
         } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mess = User::mailForValide($_SESSION['email'], $_SESSION['uuid']);
+            header("Location: index.php?controller=user&action=verify");
+            exit();
         }
         require 'app/views/user/verify.php';
         exit();
@@ -134,10 +143,12 @@ class UserController {
                 $mess['mail'] = User::mailForPassword($mail);
             }
             if (isset($_POST['username']) && !empty($_POST['username'] && $this->verifyField($_POST['username'], 50))
+                && isset($_POST['code']) && !empty($_POST['code'] && $this->verifyField($_POST['code'], 50))
                 && isset($_POST['pwd']) && !empty($_POST['pwd']) && $this->verifyField($_POST['pwd'], 255)) {
                 $username = $this->cleanField($_POST['username']);
+                $code = $this->cleanField($_POST['code']);
                 $pwd = $this->cleanField($_POST['pwd']);
-                $mess = User::resetPassword($username, $pwd);
+                $mess = User::resetPassword($username, $code, $pwd);
             }
         }
         require 'app/views/user/forget.php';

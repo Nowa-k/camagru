@@ -2,11 +2,7 @@
 require_once 'app/models/Feed.php';
 
 class FeedController {
-    public function __construct() {
-        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-        header("Pragma: no-cache");
-    }
-    
+
     private function verifyField($text, $lenght) {
         if (strlen($text) == 0 || strlen($text) > $lenght) {
             return false;
@@ -36,6 +32,7 @@ class FeedController {
     public function view($id) {
         $feed = Feed::getById($id);
         require 'app/views/feed/view.php';
+        exit();
     }
 
     public function add() {
@@ -78,22 +75,25 @@ class FeedController {
     }
 
     public function comment() {
-        if (isset($_SESSION['id'])) {
-            if ($_SESSION['valide'] == '1') {
-                if (isset($_POST['comment']) && $this->verifyField($_POST['comment'], 255) && isset($_GET['id']) && $this->verifyField($_GET['id'], 50)) {
-                    $comment = $this->cleanField($_POST['comment']);
-                    $id = $this->cleanField($_GET['id']);
-                    Feed::comment($id, $comment, $_SESSION['id']);
-                    self::index();
-                    exit();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_SESSION['id'])) {
+                if ($_SESSION['valide'] == '1') {
+                    if (isset($_POST['comment']) && $this->verifyField($_POST['comment'], 255) && isset($_POST['id']) && $this->verifyField($_POST['id'], 50)) {
+                        $comment = $this->cleanField($_POST['comment']);
+                        $id = $this->cleanField($_POST['id']);
+                        Feed::comment($id, $comment, $_SESSION['id']);
+                        header("Location: index.php");
+                        exit();
+                    }
+                } else {
+                    header("Location: index.php?controller=user&action=verify");
+                    exit(); 
                 }
             } else {
-                header("Location: index.php?controller=user&action=verify");
-                exit(); 
+                require 'app/views/user/login.php';
+                exit();
             }
-        } 
-        require 'app/views/user/login.php';
-        exit();
+        }
     }
 
     public function like() {

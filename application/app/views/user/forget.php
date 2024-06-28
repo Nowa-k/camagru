@@ -36,7 +36,11 @@
                 <input type="text" id="username" name="username" value=<?php echo $user['username'] ?>>
             </div>
             <div class="form-line">
-                <label for="pwd">Password</label>
+                <label for="code">Code</label>
+                <input type="text" id="code" name="code">
+            </div>
+            <div class="form-line">
+                <label for="pwd">Mot de passe</label>
                 <input type="password" id="pwd" name="pwd">
             </div>
             <button type="submit">Valider</button>

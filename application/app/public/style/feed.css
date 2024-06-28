@@ -59,6 +59,7 @@
 .bloc-comments {
     margin: 0 5px;
     max-height: 500px;
+    overflow-x: auto;
 }
 
 .bloc-comments h3{

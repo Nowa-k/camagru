@@ -7,6 +7,10 @@
     width: 100%; 
 }
 
+#canvas {
+    display: none;
+}
+
 .overlayImage {
     width: 50px;
 }

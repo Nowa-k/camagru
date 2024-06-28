@@ -7,6 +7,8 @@
     <title>Camagru - Feed</title>
     <link rel="stylesheet" href="/app/public/style/style.css">
     <link rel="stylesheet" href="/app/public/style/feed.css">
+    <link rel="stylesheet" href="/app/public/style/form.css">
+
 </head>
 <body>
     <?php include 'app/views/navbar.php'; ?>
@@ -41,9 +43,12 @@
                         echo '<p>' .$cmt['comment'] . '</p>';
                     } ?>
                 </div>
-                <form class="form-comment" method="POST" action="index.php?controller=feed&action=comment&id=<?php echo $feed['id']; ?>">
-                    <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
-                    <button class="" id=<?php echo $feed['id']; ?>>Envoyer</button>
+                <form class="form-comment" method="POST" action="index.php?controller=feed&action=comment">
+                    <input type="hidden" class="id" name="id" value=<?php echo $feed['id']; ?> />
+                    <div class="form-line">
+                        <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
+                    </div>
+                    <button type="submit" id=<?php echo $feed['id']; ?>>Envoyer</button>
                 </form>
             </div>
         </div>

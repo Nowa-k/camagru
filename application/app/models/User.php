@@ -49,10 +49,10 @@ class User {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public static function getByUsername($username) {
+    public static function getByUsername($username, $code) {
         $db = getDBConnection();
-        $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
-        $stmt->execute([$username]);
+        $stmt = $db->prepare('SELECT * FROM users WHERE username = ? AND uuid = ? ');
+        $stmt->execute([$username, $code]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
@@ -86,7 +86,7 @@ class User {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
     
         if (!$row) {
-            return 'Ce compte user inexistant';
+            return FALSE;
         }
     
         if (password_verify($pwd, $row['pwd'])) {
@@ -96,10 +96,9 @@ class User {
             $_SESSION['email'] = $row['email'];
             $_SESSION['valide'] = $row['valide'];
             $_SESSION['notif'] = $row['notif'];
-            return 'Connexion réussi';
-        } else {
-            return 'Connexion échouée';
-        }
+            return TRUE;
+        } 
+        return FALSE;
     }
 
     public static function updateUsername($id, $username) {
@@ -107,15 +106,18 @@ class User {
             return;
         }
         $db = getDBConnection();
-        $stmt = $db->prepare('UPDATE users SET username = ? WHERE id = ?');
-        $stmt->execute([$username, $id]);
-
-        if ($stmt->rowCount()) {
-            $_SESSION['username'] = $username;
-            return "L'username a été mis à jour avec succès.";
-        } else {
-            return "Le changement d'username a échoué.";
+        try {
+            $stmt = $db->prepare('UPDATE users SET username = ? WHERE id = ?');
+            $result = $stmt->execute([$username, $id]);
+            if ($result && $stmt->rowCount() == 1) {
+                $_SESSION['username'] = $username;
+                return "L'username a été mis à jour avec succès.";
+            } else {
+                return "Le changement d'username a échoué.";
+            }
+        } catch (PDOException $e) {
         }
+        return "Le changement d'username a échoué.";
     }
 
     public static function updateMail($id, $mail) {
@@ -123,15 +125,19 @@ class User {
             return ;
         }
         $db = getDBConnection();
-        $stmt = $db->prepare('UPDATE users SET email = ?, valide = ? WHERE id = ?');
-        $stmt->execute([$mail, 0, $id]);
-        if ($stmt->rowCount()) {
-            $_SESSION['valide'] = 0;
-            $_SESSION['email'] = $mail;
-            return "L'email a été mis à jour avec succès.";
-        } else {
-            return "Le changement d'email à échoue.";
+        try {
+            $stmt = $db->prepare('UPDATE users SET email = ?, valide = ? WHERE id = ?');
+            $stmt->execute([$mail, 0, $id]);
+            if ($stmt->rowCount() == 1) {
+                $_SESSION['valide'] = 0;
+                $_SESSION['email'] = $mail;
+                return "L'email a été mis à jour avec succès.";
+            } else {
+                return "Le changement d'email à échoue.";
+            }
+        } catch (PDOException $e) {
         }
+        return "Le changement d'email à échoue.";
     }
 
     public static function updatePwd($id, $pwd) {
@@ -156,7 +162,8 @@ class User {
     public static function setting($id, $username, $mail, $pwd, $oldpwd) {
         $user = self::getById($id);
         if (!password_verify($oldpwd, $user['pwd'])) {
-            return "Mot de passe actuel invalide.";
+            $mess['pass'] = "Mot de passe actuel invalide.";
+            return $mess;
         }
         $mess = [];
         if (!empty($username) && $username != $_SESSION['username']) {
@@ -216,12 +223,16 @@ class User {
         }
     }
 
-    public static function resetPassword($username, $pwd) {
+    public static function resetPassword($username, $code, $pwd) {
         if (empty($username)) {
             $mess['username'] = "Username invalide.";
         }
-        $user = self::getByUsername($username);
-        $mess['pwd'] = self::updatePwd($user['id'], $pwd);
+        $user = self::getByUsername($username, $code);
+        if ($user) {
+            $mess['pwd'] = self::updatePwd($user['id'], $pwd);
+        } else {
+            $mess['username'] = "Error, username ou code invalide.";
+        }
         return $mess;
     }
 
@@ -239,7 +250,8 @@ class User {
         </head>
         <body>
             <h1>Voici le lien pour créer votre nouveau mot de passe.</h1>
-            <a href='http://127.0.0.1:8080/index.php?controller=user&action=forget&code=$code' target='_blank' style='background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;'>Valider mon compte</a>
+            <p>Avec le code $code</p>
+            <a href='http://127.0.0.1:8080/index.php?controller=user&action=forget&code=$code' target='_blank' style='background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;'>Changer mon mot de passe</a>
             </body>
         </html>";
 

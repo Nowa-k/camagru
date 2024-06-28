@@ -44,9 +44,10 @@
                         echo '<p class="scroll">' . $cmt['comment'] . '</p>';
                     } ?>
                 </div>
-                <form class="form-group" method="POST" action="index.php?controller=feed&action=comment&id=<?php echo $feed['id']; ?>&page=<?php echo $page; ?>">
-                   <div class="form-line">
-                       <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
+                <form class="form-group" method="POST" action="index.php?controller=feed&action=comment">
+                    <input type="hidden" class="id" name="id" value=<?php echo $feed['id']; ?> />
+                    <div class="form-line">
+                        <input type="text" class="comment" name="comment" required minlength="1" maxlength="244" />
                     </div>
                     <button type="submit" id=<?php echo $feed['id']; ?>>Envoyer</button>
                 </form>
